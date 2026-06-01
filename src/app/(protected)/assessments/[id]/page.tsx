@@ -152,7 +152,6 @@ export default async function AssessmentDetailPage({
             overallScore={overallScore}
           />
         </div>
-        </div>
 
         {/* Middle: Overall Maturity Score */}
         <div className="w-[200px] flex-shrink-0 rounded-xl border border-purple-200 bg-white p-4 shadow-sm flex flex-col items-center justify-center">
