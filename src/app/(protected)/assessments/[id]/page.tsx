@@ -102,7 +102,7 @@ export default async function AssessmentDetailPage({
             >
               ← Back to Assessments
             </Link>
-            <h1 className="mt-1 text-xl font-bold text-gray-900">
+            <h1 className="mt-1 text-3xl font-bold text-purple-900">
               {assessment.name}
             </h1>
             <p className="text-xs text-gray-500">
@@ -149,11 +149,14 @@ export default async function AssessmentDetailPage({
             />
           </div>
 
-          {/* Function Heatmap - All Subcategories */}
+          {/* Subcategory Heatmap - Control IDs in colored boxes */}
           <div className="rounded-xl border border-purple-200 bg-white p-4 shadow-sm flex flex-col">
-            <p className="text-sm font-medium text-gray-500 mb-3">Subcategory Heatmap</p>
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-sm font-medium text-gray-500">Subcategory Heatmap</p>
+              <p className="text-xs text-gray-400">Overall Avg: <span className="font-bold text-purple-700">{overallScore?.toFixed(1) ?? "—"}</span> / 5</p>
+            </div>
             <div className="flex-1 overflow-y-auto max-h-[220px]">
-              <div className="flex flex-wrap gap-1">
+              <div className="grid grid-cols-8 sm:grid-cols-10 md:grid-cols-12 gap-1">
                 {functions.map((fn) =>
                   fn.categories.flatMap((cat) =>
                     cat.subcategories.map((sub) => {
@@ -165,16 +168,17 @@ export default async function AssessmentDetailPage({
                       if (gap !== null) {
                         if (gap >= 3) { bgColor = "bg-red-500"; textColor = "text-white"; }
                         else if (gap >= 2) { bgColor = "bg-yellow-400"; textColor = "text-gray-900"; }
-                        else if (gap >= 1) { bgColor = "bg-yellow-300"; textColor = "text-gray-900"; }
-                        else { bgColor = "bg-green-400"; textColor = "text-white"; }
+                        else if (gap >= 1) { bgColor = "bg-green-300"; textColor = "text-gray-900"; }
+                        else { bgColor = "bg-green-500"; textColor = "text-white"; }
                       }
                       return (
                         <div
                           key={sub.id}
-                          className={`${bgColor} ${textColor} rounded px-1 py-0.5 text-[8px] font-bold leading-tight`}
-                          title={`${sub.id}: Gap ${gap ?? "N/A"}`}
+                          className={`${bgColor} ${textColor} rounded-md p-1 flex flex-col items-center justify-center text-center min-h-[36px]`}
+                          title={`${sub.id} — Score: ${current ?? "N/A"} | Gap: ${gap ?? "N/A"}`}
                         >
-                          {sub.id.split("-")[0]?.split(".").pop()}-{sub.id.split("-")[1]}
+                          <span className="text-[7px] font-bold leading-tight">{sub.id}</span>
+                          <span className="text-[8px] font-semibold">{current ?? "—"}</span>
                         </div>
                       );
                     })
@@ -183,7 +187,7 @@ export default async function AssessmentDetailPage({
               </div>
             </div>
             <div className="flex items-center gap-3 mt-2 pt-2 border-t border-gray-100">
-              <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-red-500" /><span className="text-[9px] text-gray-500">High (3+)</span></div>
+              <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-red-500" /><span className="text-[9px] text-gray-500">High Gap (3+)</span></div>
               <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-yellow-400" /><span className="text-[9px] text-gray-500">Medium (2)</span></div>
               <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-green-400" /><span className="text-[9px] text-gray-500">Low (0-1)</span></div>
               <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-gray-200" /><span className="text-[9px] text-gray-500">Not Scored</span></div>
