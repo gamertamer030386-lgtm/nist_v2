@@ -126,7 +126,7 @@ export default function LoginPage() {
       {/* ─── Right Side: Dark purple with blurred background ────────────── */}
       <div className="hidden lg:block lg:w-[55%] relative overflow-hidden">
         <img
-          src="/images/xir-bg.png"
+          src="/images/xir background.png"
           alt="XIR Extended Incident Response"
           className="absolute inset-0 w-full h-full object-cover"
         />
