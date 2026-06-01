@@ -53,13 +53,13 @@ interface Props {
 
 // ─── Function metadata ───────────────────────────────────────────────────────
 
-const FUNCTION_INFO: Record<string, { color: string; bgColor: string; borderColor: string; shortDesc: string }> = {
-  GV: { color: "text-purple-700", bgColor: "bg-purple-50", borderColor: "border-purple-300", shortDesc: "Establish and monitor cybersecurity risk management strategy, expectations, and policy" },
-  ID: { color: "text-blue-700", bgColor: "bg-blue-50", borderColor: "border-blue-300", shortDesc: "Understand current cybersecurity risks to the organization" },
-  PR: { color: "text-green-700", bgColor: "bg-green-50", borderColor: "border-green-300", shortDesc: "Use safeguards to manage cybersecurity risks" },
-  DE: { color: "text-amber-700", bgColor: "bg-amber-50", borderColor: "border-amber-300", shortDesc: "Find and analyze possible cybersecurity attacks and compromises" },
-  RS: { color: "text-red-700", bgColor: "bg-red-50", borderColor: "border-red-300", shortDesc: "Take action regarding a detected cybersecurity incident" },
-  RC: { color: "text-teal-700", bgColor: "bg-teal-50", borderColor: "border-teal-300", shortDesc: "Restore assets and operations affected by a cybersecurity incident" },
+const FUNCTION_INFO: Record<string, { color: string; bgColor: string; borderColor: string }> = {
+  GV: { color: "text-purple-700", bgColor: "bg-purple-50", borderColor: "border-purple-200" },
+  ID: { color: "text-blue-700", bgColor: "bg-blue-50", borderColor: "border-blue-200" },
+  PR: { color: "text-green-700", bgColor: "bg-green-50", borderColor: "border-green-200" },
+  DE: { color: "text-amber-700", bgColor: "bg-amber-50", borderColor: "border-amber-200" },
+  RS: { color: "text-red-700", bgColor: "bg-red-50", borderColor: "border-red-200" },
+  RC: { color: "text-teal-700", bgColor: "bg-teal-50", borderColor: "border-teal-200" },
 };
 
 // ─── Main Component ──────────────────────────────────────────────────────────
@@ -74,111 +74,123 @@ export default function AssessmentScoringLayout({
 }: Props) {
   const router = useRouter();
   const [activeFunction, setActiveFunction] = useState(activeFunctionId);
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
 
   const currentFunction = functions.find((f) => f.id === activeFunction);
-  const allSubcategories = currentFunction?.categories.flatMap((c) => c.subcategories) ?? [];
-
-  const getControlCount = (fn: NistFunction) =>
-    fn.categories.reduce((sum, c) => sum + c.subcategories.length, 0);
 
   const handleFunctionClick = (fnId: string) => {
     setActiveFunction(fnId);
+    setExpandedCategories(new Set());
     router.push(`/assessments/${assessmentId}/score/${fnId}`, { scroll: false });
   };
 
+  const toggleCategory = (catId: string) => {
+    setExpandedCategories((prev) => {
+      const next = new Set(prev);
+      if (next.has(catId)) {
+        next.delete(catId);
+      } else {
+        next.add(catId);
+      }
+      return next;
+    });
+  };
+
+  const expandAll = () => {
+    const allCatIds = currentFunction?.categories.map((c) => c.id) ?? [];
+    setExpandedCategories(new Set(allCatIds));
+  };
+
+  const collapseAll = () => {
+    setExpandedCategories(new Set());
+  };
+
   return (
-    <div className="flex h-[calc(100vh-4rem)] gap-4">
-      {/* ─── Left Pane: Function Boxes ─────────────────────────────────── */}
-      <div className="w-64 flex-shrink-0 overflow-y-auto space-y-2 pr-2 flex flex-col">
-        <h2 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">
-          NIST CSF 2.0 Functions
-        </h2>
-        <div className="flex-1 space-y-2">
+    <div className="flex h-[calc(100vh-4rem)] gap-3">
+      {/* ─── Left Pane: Function Navigation ────────────────────────────── */}
+      <div className="w-56 flex-shrink-0 overflow-y-auto space-y-1.5 border-r border-[var(--border-color)] pr-3">
         {functions.map((fn) => {
-          const info = FUNCTION_INFO[fn.id] ?? { color: "text-gray-700", bgColor: "bg-gray-50", borderColor: "border-gray-300", shortDesc: "" };
+          const info = FUNCTION_INFO[fn.id] ?? { color: "text-gray-700", bgColor: "bg-gray-50", borderColor: "border-gray-200" };
           const isActive = activeFunction === fn.id;
-          const controlCount = getControlCount(fn);
-          const scoredCount = fn.categories
-            .flatMap((c) => c.subcategories)
-            .filter((sub) => scores.find((s) => s.subcategoryId === sub.id)?.currentScore !== null)
-            .length;
+          const controlCount = fn.categories.reduce((sum, c) => sum + c.subcategories.length, 0);
 
           return (
             <button
               key={fn.id}
               onClick={() => handleFunctionClick(fn.id)}
-              className={`w-full text-left rounded-lg border-2 p-3 transition-all ${
+              className={`w-full text-left rounded-lg border p-2.5 transition-all ${
                 isActive
-                  ? `${info.borderColor} ${info.bgColor} ring-2 ring-offset-1 ring-indigo-300`
-                  : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
+                  ? `${info.borderColor} ${info.bgColor} ring-1 ring-indigo-300`
+                  : "border-gray-200 bg-white hover:bg-gray-50"
               }`}
             >
-              <div className="flex items-center justify-between mb-1">
-                <span className={`text-sm font-bold ${info.color}`}>
-                  {fn.id}
-                </span>
-                <span className="text-xs text-gray-500">
-                  {scoredCount}/{controlCount}
-                </span>
+              <div className="flex items-center justify-between">
+                <span className={`text-xs font-bold ${info.color}`}>{fn.id}</span>
+                <span className="text-xs text-gray-400">{controlCount}</span>
               </div>
-              <p className={`text-xs font-semibold ${isActive ? info.color : "text-gray-800"}`}>
+              <p className={`text-xs font-semibold mt-0.5 ${isActive ? info.color : "text-gray-800"}`}>
                 {fn.name}
-              </p>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">
-                {info.shortDesc}
               </p>
             </button>
           );
         })}
-        </div>
       </div>
 
-      {/* ─── Right Pane: Subcategory Scoring Table ─────────────────────── */}
-      <div className="flex-1 overflow-auto rounded-lg border border-gray-200 bg-white">
-        <div className="sticky top-0 z-10 bg-white border-b border-gray-200 px-4 py-3">
-          <h2 className="text-lg font-bold text-gray-900">
-            {currentFunction?.id}: {currentFunction?.name}
-          </h2>
-          <p className="text-xs text-gray-500 mt-0.5">
-            {assessmentName} — {allSubcategories.length} controls
-          </p>
+      {/* ─── Right Pane: Scoring Table ─────────────────────────────────── */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Header */}
+        <div className="flex items-center justify-between px-3 py-2 border-b border-[var(--border-color)] flex-shrink-0 bg-[var(--card-bg)]">
+          <div>
+            <h2 className="text-sm font-bold text-[var(--foreground)]">
+              {currentFunction?.id}: {currentFunction?.name}
+            </h2>
+            <p className="text-xs text-[var(--muted)]">{assessmentName}</p>
+          </div>
+          <div className="flex gap-2">
+            <button onClick={expandAll} className="text-xs text-indigo-600 hover:underline">Expand All</button>
+            <button onClick={collapseAll} className="text-xs text-indigo-600 hover:underline">Collapse All</button>
+          </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead className="bg-gray-50 sticky top-[60px] z-10">
+        {/* Frozen Header Row */}
+        <div className="flex-shrink-0 overflow-x-auto bg-gray-100 border-b border-gray-300">
+          <table className="w-full min-w-[1200px] text-xs">
+            <thead>
               <tr>
-                <th className="px-3 py-2.5 text-left font-semibold text-gray-700 w-36">Sub Category ID</th>
-                <th className="px-3 py-2.5 text-center font-semibold text-gray-700 w-56">Maturity Level (1-5 / N/A)</th>
-                <th className="px-2 py-2.5 text-center font-semibold text-gray-700 w-14">Gap</th>
-                <th className="px-3 py-2.5 text-left font-semibold text-gray-700 w-44">Assigned To</th>
-                <th className="px-3 py-2.5 text-left font-semibold text-gray-700 w-48">Justification</th>
-                <th className="px-3 py-2.5 text-center font-semibold text-gray-700 w-24">Evidence</th>
-                <th className="px-3 py-2.5 text-center font-semibold text-gray-700 w-36">Target Completion</th>
+                <th className="px-2 py-2 text-left font-bold text-gray-700 w-[100px] sticky left-0 bg-gray-100 z-10">Control ID</th>
+                <th className="px-2 py-2 text-left font-bold text-gray-700 w-[200px]">Description</th>
+                <th className="px-2 py-2 text-left font-bold text-gray-700 w-[160px]">Expected Evidence</th>
+                <th className="px-2 py-2 text-center font-bold text-gray-700 w-[200px]">Maturity Level (1-5 / N/A)</th>
+                <th className="px-2 py-2 text-center font-bold text-gray-700 w-[50px]">Gap</th>
+                <th className="px-2 py-2 text-left font-bold text-gray-700 w-[150px]">Assigned To</th>
+                <th className="px-2 py-2 text-left font-bold text-gray-700 w-[160px]">Justification</th>
+                <th className="px-2 py-2 text-center font-bold text-gray-700 w-[80px]">Evidence</th>
+                <th className="px-2 py-2 text-center font-bold text-gray-700 w-[110px]">Target Date</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
-              {currentFunction?.categories.map((cat) => (
-                <>
-                  {/* Category Header Row */}
-                  <tr key={`cat-${cat.id}`} className="bg-gray-100">
-                    <td colSpan={7} className="px-3 py-2">
-                      <span className="text-xs font-bold text-indigo-700">{cat.id}</span>
-                      <span className="ml-2 text-xs font-medium text-gray-700">{cat.name}</span>
-                    </td>
-                  </tr>
-                  {/* Subcategory Rows */}
-                  {cat.subcategories.map((sub) => (
-                    <ScoringRow
-                      key={sub.id}
-                      subcategory={sub}
-                      score={scores.find((s) => s.subcategoryId === sub.id) ?? null}
-                      assessmentId={assessmentId}
-                      users={users}
-                    />
-                  ))}
-                </>
-              ))}
+          </table>
+        </div>
+
+        {/* Scrollable Body */}
+        <div className="flex-1 overflow-auto">
+          <table className="w-full min-w-[1200px] text-xs">
+            <tbody>
+              {currentFunction?.categories.map((cat) => {
+                const isExpanded = expandedCategories.has(cat.id);
+                const info = FUNCTION_INFO[currentFunction.id];
+                return (
+                  <CategorySection
+                    key={cat.id}
+                    category={cat}
+                    isExpanded={isExpanded}
+                    onToggle={() => toggleCategory(cat.id)}
+                    scores={scores}
+                    assessmentId={assessmentId}
+                    users={users}
+                    colorInfo={info}
+                  />
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -187,7 +199,56 @@ export default function AssessmentScoringLayout({
   );
 }
 
-// ─── Scoring Row Component ───────────────────────────────────────────────────
+// ─── Category Section ────────────────────────────────────────────────────────
+
+interface CategorySectionProps {
+  category: Category;
+  isExpanded: boolean;
+  onToggle: () => void;
+  scores: Score[];
+  assessmentId: string;
+  users: User[];
+  colorInfo: { color: string; bgColor: string; borderColor: string };
+}
+
+function CategorySection({ category, isExpanded, onToggle, scores, assessmentId, users, colorInfo }: CategorySectionProps) {
+  return (
+    <>
+      {/* Category Header - Clickable to expand */}
+      <tr
+        onClick={onToggle}
+        className={`cursor-pointer hover:bg-gray-50 ${colorInfo.bgColor}`}
+      >
+        <td colSpan={9} className="px-3 py-2.5">
+          <div className="flex items-center gap-2">
+            <svg
+              className={`h-4 w-4 text-gray-500 transition-transform ${isExpanded ? "rotate-90" : ""}`}
+              fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+            <span className={`text-xs font-bold ${colorInfo.color}`}>{category.id}</span>
+            <span className="text-xs font-semibold text-gray-800">{category.name}</span>
+            <span className="text-xs text-gray-500">({category.subcategories.length} controls)</span>
+          </div>
+        </td>
+      </tr>
+
+      {/* Subcategory Rows */}
+      {isExpanded && category.subcategories.map((sub) => (
+        <ScoringRow
+          key={sub.id}
+          subcategory={sub}
+          score={scores.find((s) => s.subcategoryId === sub.id) ?? null}
+          assessmentId={assessmentId}
+          users={users}
+        />
+      ))}
+    </>
+  );
+}
+
+// ─── Scoring Row ─────────────────────────────────────────────────────────────
 
 interface ScoringRowProps {
   subcategory: Subcategory;
@@ -233,7 +294,7 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
 
   const handleNASelect = () => {
     if (!justification.trim()) {
-      setValidationError("Required");
+      setValidationError("Required for N/A");
       setIsNA(true);
       setCurrentScore(null);
       return;
@@ -246,7 +307,7 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
 
   const handleJustificationBlur = () => {
     if (isNA && !justification.trim()) {
-      setValidationError("Required");
+      setValidationError("Required for N/A");
       return;
     }
     setValidationError(null);
@@ -263,18 +324,34 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
 
   const gap = currentScore !== null && !isNA ? 5 - currentScore : null;
 
+  // Derive expected evidence from implementation examples
+  const expectedEvidence = subcategory.implementationExamples
+    ? subcategory.implementationExamples.split("\n").slice(0, 2).join("; ").substring(0, 120)
+    : "Documentation demonstrating control implementation";
+
   return (
-    <tr className={`hover:bg-gray-50 ${isPending ? "opacity-50" : ""}`}>
-      {/* Sub Category ID */}
-      <td className="px-3 py-2 align-top">
-        <span className="font-medium text-gray-900 text-xs">{subcategory.id}</span>
-        <p className="text-xs text-gray-500 line-clamp-1 mt-0.5" title={subcategory.description}>
+    <tr className={`hover:bg-gray-50 border-b border-gray-100 ${isPending ? "opacity-50" : ""}`}>
+      {/* Control ID */}
+      <td className="px-2 py-2 align-top sticky left-0 bg-white z-[5]">
+        <span className="font-bold text-gray-900">{subcategory.id}</span>
+      </td>
+
+      {/* Description */}
+      <td className="px-2 py-2 align-top">
+        <p className="text-xs text-gray-700 leading-relaxed">
           {subcategory.description}
         </p>
       </td>
 
+      {/* Expected Evidence */}
+      <td className="px-2 py-2 align-top">
+        <p className="text-xs text-gray-500 leading-relaxed italic">
+          {expectedEvidence}...
+        </p>
+      </td>
+
       {/* Maturity Level */}
-      <td className="px-3 py-2 align-top">
+      <td className="px-2 py-2 align-top">
         <div className="flex items-center gap-0.5 justify-center">
           {[1, 2, 3, 4, 5].map((level) => (
             <button
@@ -297,9 +374,7 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
             onClick={handleNASelect}
             disabled={isPending}
             className={`px-1.5 h-7 rounded text-xs font-bold transition-all ${
-              isNA
-                ? "bg-amber-500 text-white"
-                : "border border-gray-300 bg-white text-gray-600 hover:bg-amber-50"
+              isNA ? "bg-amber-500 text-white" : "border border-gray-300 bg-white text-gray-600 hover:bg-amber-50"
             }`}
           >
             N/A
@@ -314,59 +389,54 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
             {gap}
           </span>
         ) : (
-          <span className="text-xs text-gray-400">—</span>
+          <span className="text-gray-400">—</span>
         )}
       </td>
 
       {/* Assigned To */}
-      <td className="px-3 py-2 align-top">
+      <td className="px-2 py-2 align-top">
         <select
           value={assignedTo}
           onChange={(e) => setAssignedTo(e.target.value)}
-          className="w-full rounded border border-gray-300 px-1.5 py-1 text-xs focus:ring-1 focus:ring-indigo-500"
+          className="w-full rounded border border-gray-300 px-1 py-1 text-xs"
         >
           <option value="">Select...</option>
           {users.map((u) => (
-            <option key={u.id} value={u.id}>
-              {u.email}
-            </option>
+            <option key={u.id} value={u.id}>{u.email}</option>
           ))}
         </select>
       </td>
 
       {/* Justification */}
-      <td className="px-3 py-2 align-top">
+      <td className="px-2 py-2 align-top">
         <textarea
           value={justification}
           onChange={(e) => setJustification(e.target.value)}
           onBlur={handleJustificationBlur}
-          rows={1}
+          rows={2}
           maxLength={500}
           placeholder={isNA ? "Required..." : "Justification..."}
-          className={`w-full rounded border px-1.5 py-1 text-xs resize-none focus:ring-1 ${
-            validationError ? "border-red-400 focus:ring-red-500 bg-red-50" : "border-gray-300 focus:ring-indigo-500"
+          className={`w-full rounded border px-1.5 py-1 text-xs resize-y ${
+            validationError ? "border-red-400 bg-red-50" : "border-gray-300"
           }`}
         />
       </td>
 
       {/* Evidence */}
-      <td className="px-3 py-2 align-top text-center">
+      <td className="px-2 py-2 align-top text-center">
         <label className="inline-flex cursor-pointer items-center gap-1 rounded border border-gray-300 px-1.5 py-1 text-xs hover:bg-gray-50">
-          <svg className="h-3 w-3 text-gray-500" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
-          </svg>
-          {evidenceFiles.length > 0 ? `${evidenceFiles.length}` : "Upload"}
+          📎 {evidenceFiles.length > 0 ? evidenceFiles.length : "Upload"}
           <input type="file" multiple onChange={handleFileChange} className="hidden" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.txt" />
         </label>
       </td>
 
-      {/* Target Completion Date */}
-      <td className="px-3 py-2 align-top">
+      {/* Target Date */}
+      <td className="px-2 py-2 align-top">
         <input
           type="date"
           value={targetDate}
           onChange={(e) => setTargetDate(e.target.value)}
-          className="w-full rounded border border-gray-300 px-1.5 py-1 text-xs focus:ring-1 focus:ring-indigo-500"
+          className="w-full rounded border border-gray-300 px-1 py-1 text-xs"
         />
       </td>
     </tr>
