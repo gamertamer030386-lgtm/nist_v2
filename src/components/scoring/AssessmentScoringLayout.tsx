@@ -192,7 +192,6 @@ export default function AssessmentScoringLayout({
           </tbody>
         </table>
       </div>
-      </div>
     </div>
   );
 }
