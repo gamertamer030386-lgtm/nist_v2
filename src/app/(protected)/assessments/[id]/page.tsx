@@ -10,6 +10,7 @@ import {
   calculateProgress,
 } from "@/lib/scoring";
 import DashboardRadarChart from "@/components/dashboard/DashboardRadarChart";
+import SubcategoryHeatmapGrid from "@/components/dashboard/SubcategoryHeatmapGrid";
 
 interface AssessmentDetailPageProps {
   params: Promise<{ id: string }>;
@@ -43,7 +44,7 @@ export default async function AssessmentDetailPage({
         include: {
           subcategories: {
             orderBy: { sortOrder: "asc" },
-            select: { id: true },
+            select: { id: true, name: true, description: true },
           },
         },
       },
@@ -131,47 +132,26 @@ export default async function AssessmentDetailPage({
       <div className="flex-1 flex p-4 gap-4 overflow-hidden">
         {/* Left: Heatmap 10x10 grid + 6 */}
         <div className="flex-1 rounded-xl border border-purple-200 bg-white p-3 shadow-sm flex flex-col overflow-hidden">
-          <div className="flex items-center justify-between mb-2 flex-shrink-0">
-            <p className="text-sm font-semibold text-gray-700">Subcategory Heatmap</p>
-            <p className="text-xs text-gray-400">106 controls</p>
-          </div>
-          <div className="flex-1 flex flex-col justify-center">
-            <div className="grid grid-cols-10 gap-1">
-              {functions.map((fn) =>
-                fn.categories.flatMap((cat) =>
-                  cat.subcategories.map((sub) => {
-                    const score = scoreMap.get(sub.id);
-                    const current = score?.currentScore ?? null;
-                    const gap = current !== null ? 5 - current : null;
-                    let bgColor = "bg-gray-200";
-                    let textColor = "text-gray-500";
-                    if (gap !== null) {
-                      if (gap >= 3) { bgColor = "bg-red-500"; textColor = "text-white"; }
-                      else if (gap >= 2) { bgColor = "bg-yellow-400"; textColor = "text-gray-900"; }
-                      else if (gap >= 1) { bgColor = "bg-green-300"; textColor = "text-gray-900"; }
-                      else { bgColor = "bg-green-500"; textColor = "text-white"; }
-                    }
-                    return (
-                      <div
-                        key={sub.id}
-                        className={`${bgColor} ${textColor} rounded p-0.5 flex flex-col items-center justify-center text-center aspect-square`}
-                        title={`${sub.id} — Score: ${current ?? "N/A"} | Gap: ${gap ?? "N/A"}`}
-                      >
-                        <span className="text-[6px] font-bold leading-none">{sub.id}</span>
-                        <span className="text-[8px] font-semibold">{current ?? "—"}</span>
-                      </div>
-                    );
-                  })
-                )
-              )}
-            </div>
-          </div>
-          <div className="flex items-center gap-3 mt-2 pt-2 border-t border-gray-100 flex-shrink-0">
-            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-red-500" /><span className="text-[8px] text-gray-500">High (3+)</span></div>
-            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-yellow-400" /><span className="text-[8px] text-gray-500">Med (2)</span></div>
-            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-green-400" /><span className="text-[8px] text-gray-500">Low (0-1)</span></div>
-            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-gray-200" /><span className="text-[8px] text-gray-500">N/A</span></div>
-          </div>
+          <SubcategoryHeatmapGrid
+            items={functions.flatMap((fn) =>
+              fn.categories.flatMap((cat) =>
+                cat.subcategories.map((sub) => {
+                  const score = scoreMap.get(sub.id);
+                  const current = score?.currentScore ?? null;
+                  return {
+                    id: sub.id,
+                    currentScore: current,
+                    gap: current !== null ? 5 - current : null,
+                    description: sub.description,
+                    categoryName: cat.name,
+                    functionName: fn.name,
+                  };
+                })
+              )
+            )}
+            overallScore={overallScore}
+          />
+        </div>
         </div>
 
         {/* Middle: Overall Maturity Score */}
