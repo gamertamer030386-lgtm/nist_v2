@@ -124,25 +124,12 @@ export default function LoginPage() {
       </div>
 
       {/* ─── Right Side: Dark purple with blurred background ────────────── */}
-      <div className="hidden lg:block lg:w-[55%] relative bg-gradient-to-br from-purple-950 via-purple-900 to-indigo-950">
-        {/* Blurred purple circles */}
-        <div className="absolute top-[10%] left-[20%] w-80 h-80 bg-purple-600/20 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[15%] right-[10%] w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px]" />
-        <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-violet-500/15 rounded-full blur-[80px]" />
-
-        {/* Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full px-12 text-center">
-          <h2 className="text-4xl font-bold text-white mb-3 tracking-tight">
-            XIR
-          </h2>
-          <p className="text-lg text-purple-200 font-medium mb-2">
-            Extended Incident Response
-          </p>
-          <div className="w-12 h-0.5 bg-purple-400 mx-auto mb-4" />
-          <p className="text-purple-300 text-sm max-w-md leading-relaxed">
-            Cybersecurity Posture Maturity Assessment Platform. Evaluate, analyze, and strengthen your organization&apos;s security posture with NIST CSF 2.0.
-          </p>
-        </div>
+      <div className="hidden lg:block lg:w-[55%] relative overflow-hidden">
+        <img
+          src="/images/xir-bg.png"
+          alt="XIR Extended Incident Response"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
       </div>
     </div>
   );
