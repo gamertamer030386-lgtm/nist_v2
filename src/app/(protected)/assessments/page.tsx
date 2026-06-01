@@ -6,7 +6,8 @@ export default async function AssessmentsPage() {
   const assessments = await getAssessments();
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="relative mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+      <img src="/images/xir background.png" alt="" className="fixed inset-0 w-full h-full object-cover blur-[20px] opacity-20 -z-10" />
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900">Assessments</h1>
         <Link

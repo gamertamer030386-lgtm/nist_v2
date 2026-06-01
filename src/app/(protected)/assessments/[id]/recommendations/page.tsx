@@ -75,7 +75,7 @@ export default async function RecommendationsPage({
   ];
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="mb-4">
         <p className="text-sm text-gray-500">
@@ -113,76 +113,63 @@ export default async function RecommendationsPage({
           </p>
         </div>
       ) : (
-        /* Recommendations grouped by category */
-        <div className="space-y-8">
+        /* Recommendations in 4 columns by category */
+        <div className="grid grid-cols-4 gap-4">
           {categoryOrder.map((category) => {
-            const items = grouped[category];
-            if (!items || items.length === 0) return null;
-
+            const items = grouped[category] || [];
             const config = CATEGORY_CONFIG[category];
 
             return (
-              <section key={category} aria-labelledby={`category-${category}`}>
-                <div className="mb-4 flex items-center gap-2">
-                  <span className="text-xl" aria-hidden="true">
+              <div key={category} className="flex flex-col">
+                {/* Column header */}
+                <div className="mb-3 flex items-center gap-2 border-b border-gray-200 pb-2">
+                  <span className="text-lg" aria-hidden="true">
                     {config.icon}
                   </span>
-                  <h2
-                    id={`category-${category}`}
-                    className="text-lg font-semibold text-gray-900"
-                  >
+                  <h2 className="text-sm font-semibold text-gray-900">
                     {config.label}
                   </h2>
-                  <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">
+                  <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">
                     {items.length}
                   </span>
                 </div>
 
+                {/* Recommendation cards */}
                 <div className="space-y-3">
                   {items.map((rec) => (
                     <div
                       key={rec.id}
-                      className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
+                      className="rounded-lg border border-gray-200 bg-white p-3 shadow-sm"
                     >
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          <div className="mb-2 flex flex-wrap items-center gap-2">
-                            {/* Subcategory ID badge */}
-                            <span className="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700">
-                              {rec.subcategoryId}
-                            </span>
-
-                            {/* Priority level badge */}
-                            <span
-                              className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ${PRIORITY_COLORS[rec.priorityLevel]}`}
-                            >
-                              {rec.priorityLevel}
-                            </span>
-
-                            {/* Effort level */}
-                            <span className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600">
-                              {EFFORT_LABELS[rec.effortLevel]}
-                            </span>
-                          </div>
-
-                          {/* Description */}
-                          <p className="text-sm text-gray-700">
-                            {rec.description}
-                          </p>
-                        </div>
-
-                        {/* Gap size indicator */}
-                        <div className="flex-shrink-0 text-right">
-                          <p className="text-xs text-gray-500">Gap</p>
-                          <p className="text-lg font-bold text-gray-900">
-                            {rec.priorityScore.toFixed(1)}
-                          </p>
-                        </div>
+                      <div className="mb-2 flex flex-wrap items-center gap-1">
+                        <span className="inline-flex items-center rounded-md bg-indigo-50 px-1.5 py-0.5 text-[10px] font-medium text-indigo-700">
+                          {rec.subcategoryId}
+                        </span>
+                        <span
+                          className={`inline-flex items-center rounded-md px-1.5 py-0.5 text-[10px] font-medium ${PRIORITY_COLORS[rec.priorityLevel]}`}
+                        >
+                          {rec.priorityLevel}
+                        </span>
+                        <span className="inline-flex items-center rounded-md bg-gray-50 px-1.5 py-0.5 text-[10px] font-medium text-gray-600">
+                          {EFFORT_LABELS[rec.effortLevel]}
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-700">
+                        {rec.description}
+                      </p>
+                      <div className="mt-2 text-right">
+                        <span className="text-[10px] text-gray-500">Gap: </span>
+                        <span className="text-xs font-bold text-gray-900">
+                          {rec.priorityScore.toFixed(1)}
+                        </span>
                       </div>
                     </div>
                   ))}
+                  {items.length === 0 && (
+                    <p className="text-xs text-gray-400 italic">No recommendations</p>
+                  )}
                 </div>
-              </section>
+              </div>
             );
           })}
         </div>
