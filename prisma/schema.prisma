@@ -1,0 +1,219 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  END_USER
+}
+
+enum ThemeMode {
+  DAY
+  NIGHT
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum NotificationType {
+  TASK_ASSIGNED
+  ASSESSMENT_SUBMITTED
+}
+
+enum ControlCategory {
+  PEOPLE
+  TOOLS
+  PROCESS
+  PARTNERS
+}
+
+enum PriorityLevel {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum EffortLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum RoadmapPhase {
+  QUICK_WIN
+  SHORT_TERM
+  MEDIUM_TERM
+  LONG_TERM
+}
+
+// ─── Models ──────────────────────────────────────────────────────────────────
+
+model User {
+  id            String       @id @default(cuid())
+  email         String       @unique
+  passwordHash  String
+  name          String?
+  role          UserRole     @default(END_USER)
+  officeId      String?
+  isActive      Boolean      @default(true)
+  themeMode     ThemeMode    @default(DAY)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  office        Office?      @relation(fields: [officeId], references: [id])
+  assessments   Assessment[]
+  assignedTasks TaskAssignment[] @relation("AssignedTasks")
+  createdTasks  TaskAssignment[] @relation("CreatedTasks")
+  notifications Notification[]
+
+  @@index([officeId])
+  @@index([role])
+}
+
+model Office {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  users       User[]
+  assessments Assessment[]
+}
+
+model NistFunction {
+  id          String         @id
+  name        String
+  description String         @db.Text
+  sortOrder   Int
+  categories  NistCategory[]
+}
+
+model NistCategory {
+  id            String            @id
+  name          String
+  description   String            @db.Text
+  sortOrder     Int
+  functionId    String
+  function      NistFunction      @relation(fields: [functionId], references: [id])
+  subcategories NistSubcategory[]
+}
+
+model NistSubcategory {
+  id                     String             @id
+  name                   String
+  description            String             @db.Text
+  implementationExamples String             @db.Text
+  informativeReferences  String             @db.Text
+  sortOrder              Int
+  categoryId             String
+  category               NistCategory       @relation(fields: [categoryId], references: [id])
+  scores                 SubcategoryScore[]
+  recommendations        ControlRecommendation[]
+}
+
+model Assessment {
+  id              String             @id @default(cuid())
+  name            String
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  userId          String
+  officeId        String?
+  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  office          Office?            @relation(fields: [officeId], references: [id])
+  scores          SubcategoryScore[]
+  recommendations ControlRecommendation[]
+  taskAssignments TaskAssignment[]
+
+  @@index([userId, createdAt(sort: Desc)])
+  @@index([officeId])
+}
+
+/// CHECK constraint: currentScore must be between 1 and 5 (inclusive) when not null
+/// CHECK constraint: targetScore must be between 1 and 5 (inclusive) when not null
+/// SQL: ALTER TABLE "SubcategoryScore" ADD CONSTRAINT "chk_current_score" CHECK ("currentScore" IS NULL OR ("currentScore" >= 1 AND "currentScore" <= 5));
+/// SQL: ALTER TABLE "SubcategoryScore" ADD CONSTRAINT "chk_target_score" CHECK ("targetScore" IS NULL OR ("targetScore" >= 1 AND "targetScore" <= 5));
+model SubcategoryScore {
+  id              String          @id @default(cuid())
+  currentScore    Int?            @db.SmallInt
+  targetScore     Int?            @db.SmallInt
+  comment         String?         @db.Text
+  assessmentId    String
+  subcategoryId   String
+  assessment      Assessment      @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  subcategory     NistSubcategory @relation(fields: [subcategoryId], references: [id])
+
+  @@unique([assessmentId, subcategoryId])
+  @@index([assessmentId])
+}
+
+model ControlRecommendation {
+  id              String           @id @default(cuid())
+  assessmentId    String
+  subcategoryId   String
+  category        ControlCategory
+  description     String           @db.Text
+  priorityScore   Float
+  priorityLevel   PriorityLevel
+  effortLevel     EffortLevel
+  roadmapPhase    RoadmapPhase
+  dependsOnId     String?
+  createdAt       DateTime         @default(now())
+
+  assessment      Assessment       @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  subcategory     NistSubcategory  @relation(fields: [subcategoryId], references: [id])
+  dependsOn       ControlRecommendation? @relation("RecommendationDependency", fields: [dependsOnId], references: [id])
+  dependedOnBy    ControlRecommendation[] @relation("RecommendationDependency")
+
+  @@index([assessmentId])
+  @@index([assessmentId, priorityScore(sort: Desc)])
+}
+
+model TaskAssignment {
+  id            String      @id @default(cuid())
+  assessmentId  String?
+  assignedToId  String
+  assignedById  String
+  deadline      DateTime
+  instructions  String?     @db.Text
+  status        TaskStatus  @default(PENDING)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  assessment    Assessment? @relation(fields: [assessmentId], references: [id])
+  assignedTo    User        @relation("AssignedTasks", fields: [assignedToId], references: [id])
+  assignedBy    User        @relation("CreatedTasks", fields: [assignedById], references: [id])
+
+  @@index([assignedToId])
+  @@index([assignedById])
+  @@index([status])
+}
+
+model Notification {
+  id          String           @id @default(cuid())
+  userId      String
+  type        NotificationType
+  title       String
+  message     String           @db.Text
+  isRead      Boolean          @default(false)
+  referenceId String?
+  createdAt   DateTime         @default(now())
+
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+  @@index([userId, createdAt(sort: Desc)])
+}

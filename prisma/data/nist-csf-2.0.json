@@ -1,0 +1,1152 @@
+{
+  "functions": [
+    {
+      "id": "GV",
+      "name": "GOVERN",
+      "description": "The organization's cybersecurity risk management strategy, expectations, and policy are established, communicated, and monitored",
+      "sortOrder": 1
+    },
+    {
+      "id": "ID",
+      "name": "IDENTIFY",
+      "description": "The organization's current cybersecurity risks are understood",
+      "sortOrder": 2
+    },
+    {
+      "id": "PR",
+      "name": "PROTECT",
+      "description": "Safeguards to manage the organization's cybersecurity risks are used",
+      "sortOrder": 3
+    },
+    {
+      "id": "DE",
+      "name": "DETECT",
+      "description": "Possible cybersecurity attacks and compromises are found and analyzed",
+      "sortOrder": 4
+    },
+    {
+      "id": "RS",
+      "name": "RESPOND",
+      "description": "Actions regarding a detected cybersecurity incident are taken",
+      "sortOrder": 5
+    },
+    {
+      "id": "RC",
+      "name": "RECOVER",
+      "description": "Assets and operations affected by a cybersecurity incident are restored",
+      "sortOrder": 6
+    }
+  ],
+  "categories": [
+    {
+      "id": "GV.OC",
+      "name": "Organizational Context",
+      "description": "The circumstances — mission, stakeholder expectations, dependencies, and legal, regulatory, and contractual requirements — surrounding the organization's cybersecurity risk management decisions are understood",
+      "sortOrder": 1,
+      "functionId": "GV"
+    },
+    {
+      "id": "GV.RM",
+      "name": "Risk Management Strategy",
+      "description": "The organization's priorities, constraints, risk tolerance and appetite statements, and assumptions are established, communicated, and used to support operational risk decisions",
+      "sortOrder": 2,
+      "functionId": "GV"
+    },
+    {
+      "id": "GV.RR",
+      "name": "Roles Responsibilities and Authorities",
+      "description": "Cybersecurity roles, responsibilities, and authorities to foster accountability, performance assessment, and continuous improvement are established and communicated",
+      "sortOrder": 3,
+      "functionId": "GV"
+    },
+    {
+      "id": "GV.PO",
+      "name": "Policy",
+      "description": "Organizational cybersecurity policy is established, communicated, and enforced",
+      "sortOrder": 4,
+      "functionId": "GV"
+    },
+    {
+      "id": "GV.OV",
+      "name": "Oversight",
+      "description": "Results of organization-wide cybersecurity risk management activities and performance are used to inform, improve, and adjust the risk management strategy",
+      "sortOrder": 5,
+      "functionId": "GV"
+    },
+    {
+      "id": "GV.SC",
+      "name": "Cybersecurity Supply Chain Risk Management",
+      "description": "Cyber supply chain risk management processes are identified, established, managed, monitored, and improved by organizational stakeholders",
+      "sortOrder": 6,
+      "functionId": "GV"
+    },
+    {
+      "id": "ID.AM",
+      "name": "Asset Management",
+      "description": "Assets (e.g., data, hardware, software, systems, facilities, services, people) that enable the organization to achieve business purposes are identified and managed consistent with their relative importance to organizational objectives and the organization's risk strategy",
+      "sortOrder": 1,
+      "functionId": "ID"
+    },
+    {
+      "id": "ID.RA",
+      "name": "Risk Assessment",
+      "description": "The cybersecurity risk to the organization, assets, and individuals is understood by the organization",
+      "sortOrder": 2,
+      "functionId": "ID"
+    },
+    {
+      "id": "ID.IM",
+      "name": "Improvement",
+      "description": "Improvements to organizational cybersecurity risk management processes, procedures, and activities are identified across all CSF Functions",
+      "sortOrder": 3,
+      "functionId": "ID"
+    },
+    {
+      "id": "PR.AA",
+      "name": "Identity Management Authentication and Access Control",
+      "description": "Access to physical and logical assets is limited to authorized users, services, and hardware and managed commensurate with the assessed risk of unauthorized access",
+      "sortOrder": 1,
+      "functionId": "PR"
+    },
+    {
+      "id": "PR.AT",
+      "name": "Awareness and Training",
+      "description": "The organization's personnel are provided cybersecurity awareness and training so that they can perform their cybersecurity-related tasks",
+      "sortOrder": 2,
+      "functionId": "PR"
+    },
+    {
+      "id": "PR.DS",
+      "name": "Data Security",
+      "description": "Data are managed consistent with the organization's risk strategy to protect the confidentiality, integrity, and availability of information",
+      "sortOrder": 3,
+      "functionId": "PR"
+    },
+    {
+      "id": "PR.PS",
+      "name": "Platform Security",
+      "description": "The hardware, software (e.g., firmware, operating systems, applications), and services of physical and virtual platforms are managed consistent with the organization's risk strategy to protect their confidentiality, integrity, and availability",
+      "sortOrder": 4,
+      "functionId": "PR"
+    },
+    {
+      "id": "PR.IR",
+      "name": "Technology Infrastructure Resilience",
+      "description": "Security architectures are managed with the organization's risk strategy to protect asset confidentiality, integrity, and availability, and organizational resilience",
+      "sortOrder": 5,
+      "functionId": "PR"
+    },
+    {
+      "id": "DE.CM",
+      "name": "Continuous Monitoring",
+      "description": "Assets are monitored to find anomalies, indicators of compromise, and other potentially adverse events",
+      "sortOrder": 1,
+      "functionId": "DE"
+    },
+    {
+      "id": "DE.AE",
+      "name": "Adverse Event Analysis",
+      "description": "Anomalies, indicators of compromise, and other potentially adverse events are analyzed to characterize the events and detect cybersecurity incidents",
+      "sortOrder": 2,
+      "functionId": "DE"
+    },
+    {
+      "id": "RS.MA",
+      "name": "Incident Management",
+      "description": "Responses to detected cybersecurity incidents are managed",
+      "sortOrder": 1,
+      "functionId": "RS"
+    },
+    {
+      "id": "RS.AN",
+      "name": "Incident Analysis",
+      "description": "Investigations are conducted to ensure effective response and support forensics and recovery activities",
+      "sortOrder": 2,
+      "functionId": "RS"
+    },
+    {
+      "id": "RS.CO",
+      "name": "Incident Response Reporting and Communication",
+      "description": "Response activities are coordinated with internal and external stakeholders as required by laws, regulations, or policies",
+      "sortOrder": 3,
+      "functionId": "RS"
+    },
+    {
+      "id": "RS.MI",
+      "name": "Incident Mitigation",
+      "description": "Activities are performed to prevent expansion of an event and mitigate its effects",
+      "sortOrder": 4,
+      "functionId": "RS"
+    },
+    {
+      "id": "RC.RP",
+      "name": "Incident Recovery Plan Execution",
+      "description": "Restoration activities are performed to ensure operational availability of systems and services affected by cybersecurity incidents",
+      "sortOrder": 1,
+      "functionId": "RC"
+    },
+    {
+      "id": "RC.CO",
+      "name": "Incident Recovery Communication",
+      "description": "Restoration activities are coordinated with internal and external parties",
+      "sortOrder": 2,
+      "functionId": "RC"
+    }
+  ],
+  "subcategories": [
+    {
+      "id": "GV.OC-01",
+      "name": "GV.OC-01",
+      "description": "The organizational mission is understood and informs cybersecurity risk management",
+      "implementationExamples": "Ex1: Establish and communicate the organization's mission and objectives Ex2: Determine how cybersecurity risk management supports and enables the mission Ex3: Document the relationship between cybersecurity objectives and organizational objectives",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-11",
+      "sortOrder": 1,
+      "categoryId": "GV.OC"
+    },
+    {
+      "id": "GV.OC-02",
+      "name": "GV.OC-02",
+      "description": "Internal and external stakeholders are understood, and their needs and expectations regarding cybersecurity risk management are understood and considered",
+      "implementationExamples": "Ex1: Identify relevant internal stakeholders and their cybersecurity-related expectations Ex2: Identify relevant external stakeholders and their cybersecurity-related expectations Ex3: Communicate with stakeholders to understand their needs",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-11, PM-25",
+      "sortOrder": 2,
+      "categoryId": "GV.OC"
+    },
+    {
+      "id": "GV.OC-03",
+      "name": "GV.OC-03",
+      "description": "Legal, regulatory, and contractual requirements regarding cybersecurity — including privacy and civil liberties obligations — are understood and managed",
+      "implementationExamples": "Ex1: Determine legal and regulatory requirements affecting the organization Ex2: Determine contractual cybersecurity obligations Ex3: Integrate legal, regulatory, and contractual requirements into cybersecurity risk management",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-4, PM-6, PM-10",
+      "sortOrder": 3,
+      "categoryId": "GV.OC"
+    },
+    {
+      "id": "GV.OC-04",
+      "name": "GV.OC-04",
+      "description": "Critical objectives, capabilities, and services that external stakeholders depend on or expect from the organization are understood and communicated",
+      "implementationExamples": "Ex1: Identify critical services the organization provides to external stakeholders Ex2: Determine stakeholder dependencies on organizational services Ex3: Communicate service-level expectations with stakeholders",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-11, PM-25",
+      "sortOrder": 4,
+      "categoryId": "GV.OC"
+    },
+    {
+      "id": "GV.OC-05",
+      "name": "GV.OC-05",
+      "description": "Outcomes, capabilities, and services that the organization depends on are understood and communicated",
+      "implementationExamples": "Ex1: Identify critical dependencies on external services and providers Ex2: Assess the cybersecurity posture of critical dependencies Ex3: Document and communicate dependency risks to leadership",
+      "informativeReferences": "CIS Controls v8: 15.1 | NIST SP 800-53 Rev 5: PM-11, SR-2",
+      "sortOrder": 5,
+      "categoryId": "GV.OC"
+    },
+    {
+      "id": "GV.RM-01",
+      "name": "GV.RM-01",
+      "description": "Risk management objectives are established and agreed to by organizational stakeholders",
+      "implementationExamples": "Ex1: Establish risk management objectives aligned with organizational mission Ex2: Obtain leadership agreement on risk management objectives Ex3: Communicate risk management objectives across the organization",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-9, PM-28",
+      "sortOrder": 1,
+      "categoryId": "GV.RM"
+    },
+    {
+      "id": "GV.RM-02",
+      "name": "GV.RM-02",
+      "description": "Risk appetite and risk tolerance statements are established, communicated, and maintained",
+      "implementationExamples": "Ex1: Determine organizational risk appetite and tolerance levels Ex2: Document risk appetite and tolerance statements Ex3: Communicate risk appetite and tolerance to relevant stakeholders",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-9",
+      "sortOrder": 2,
+      "categoryId": "GV.RM"
+    },
+    {
+      "id": "GV.RM-03",
+      "name": "GV.RM-03",
+      "description": "Cybersecurity risk management activities and outcomes are included in enterprise risk management processes",
+      "implementationExamples": "Ex1: Integrate cybersecurity risk into enterprise risk management framework Ex2: Report cybersecurity risks alongside other enterprise risks Ex3: Align cybersecurity risk assessment methods with enterprise risk methods",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-9, PM-28",
+      "sortOrder": 3,
+      "categoryId": "GV.RM"
+    },
+    {
+      "id": "GV.RM-04",
+      "name": "GV.RM-04",
+      "description": "Strategic direction that describes appropriate risk response options is established and communicated",
+      "implementationExamples": "Ex1: Define acceptable risk response options (accept, avoid, mitigate, transfer) Ex2: Establish criteria for selecting risk response options Ex3: Communicate risk response guidance to operational teams",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-9",
+      "sortOrder": 4,
+      "categoryId": "GV.RM"
+    },
+    {
+      "id": "GV.RM-05",
+      "name": "GV.RM-05",
+      "description": "Lines of communication across the organization are established for cybersecurity risks, including risks from suppliers and other third parties",
+      "implementationExamples": "Ex1: Establish communication channels for cybersecurity risk information Ex2: Define escalation paths for cybersecurity risk issues Ex3: Include supply chain risk in communication protocols",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-9, PM-25, SR-1",
+      "sortOrder": 5,
+      "categoryId": "GV.RM"
+    },
+    {
+      "id": "GV.RM-06",
+      "name": "GV.RM-06",
+      "description": "A standardized method for calculating, documenting, categorizing, and prioritizing cybersecurity risks is established and communicated",
+      "implementationExamples": "Ex1: Adopt a standardized risk assessment methodology Ex2: Define risk categorization and prioritization criteria Ex3: Document and communicate the risk calculation method",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-9, RA-1, RA-3",
+      "sortOrder": 6,
+      "categoryId": "GV.RM"
+    },
+    {
+      "id": "GV.RM-07",
+      "name": "GV.RM-07",
+      "description": "Strategic opportunities (i.e., positive risks) are characterized and are included in organizational cybersecurity risk discussions",
+      "implementationExamples": "Ex1: Identify strategic opportunities from cybersecurity investments Ex2: Include positive risk scenarios in risk discussions Ex3: Evaluate cybersecurity improvements that enable business opportunities",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-9",
+      "sortOrder": 7,
+      "categoryId": "GV.RM"
+    },
+    {
+      "id": "GV.RR-01",
+      "name": "GV.RR-01",
+      "description": "Organizational leadership is responsible and accountable for cybersecurity risk and fosters a culture that is risk-aware, ethical, and continually improving",
+      "implementationExamples": "Ex1: Leaders accept accountability for cybersecurity risk decisions Ex2: Foster a risk-aware organizational culture Ex3: Promote ethical behavior in cybersecurity practices",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-1, PM-2",
+      "sortOrder": 1,
+      "categoryId": "GV.RR"
+    },
+    {
+      "id": "GV.RR-02",
+      "name": "GV.RR-02",
+      "description": "Roles, responsibilities, and authorities related to cybersecurity risk management are established, communicated, understood, and enforced",
+      "implementationExamples": "Ex1: Define cybersecurity roles and responsibilities Ex2: Assign authorities for cybersecurity decisions Ex3: Communicate roles and responsibilities to all personnel",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-1, PM-2, PM-13",
+      "sortOrder": 2,
+      "categoryId": "GV.RR"
+    },
+    {
+      "id": "GV.RR-03",
+      "name": "GV.RR-03",
+      "description": "Adequate resources are allocated commensurate with the cybersecurity risk strategy, roles, responsibilities, and policies",
+      "implementationExamples": "Ex1: Allocate budget for cybersecurity programs Ex2: Ensure adequate staffing for cybersecurity functions Ex3: Provide tools and technology resources for cybersecurity",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-3",
+      "sortOrder": 3,
+      "categoryId": "GV.RR"
+    },
+    {
+      "id": "GV.RR-04",
+      "name": "GV.RR-04",
+      "description": "Cybersecurity is included in human resources practices",
+      "implementationExamples": "Ex1: Include cybersecurity responsibilities in job descriptions Ex2: Conduct cybersecurity background checks for sensitive roles Ex3: Address cybersecurity in employee onboarding and offboarding",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PS-1, PS-2, PS-3, PS-4, PS-5",
+      "sortOrder": 4,
+      "categoryId": "GV.RR"
+    },
+    {
+      "id": "GV.PO-01",
+      "name": "GV.PO-01",
+      "description": "Policy for managing cybersecurity risks is established based on organizational context, cybersecurity strategy, and priorities and is communicated and enforced",
+      "implementationExamples": "Ex1: Develop cybersecurity policy based on risk strategy Ex2: Communicate policy to all relevant personnel Ex3: Establish enforcement mechanisms for policy compliance",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: All -1 controls (policy families)",
+      "sortOrder": 1,
+      "categoryId": "GV.PO"
+    },
+    {
+      "id": "GV.PO-02",
+      "name": "GV.PO-02",
+      "description": "Policy for managing cybersecurity risks is reviewed, updated, communicated, and enforced to reflect changes in requirements, threats, technology, and organizational mission",
+      "implementationExamples": "Ex1: Establish a policy review schedule Ex2: Update policies when significant changes occur Ex3: Communicate policy updates to affected personnel",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: All -1 controls (policy families)",
+      "sortOrder": 2,
+      "categoryId": "GV.PO"
+    },
+    {
+      "id": "GV.OV-01",
+      "name": "GV.OV-01",
+      "description": "Cybersecurity risk management strategy outcomes are reviewed to inform and adjust strategy and direction",
+      "implementationExamples": "Ex1: Review cybersecurity risk management outcomes periodically Ex2: Adjust strategy based on performance metrics Ex3: Report outcomes to leadership for decision-making",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-9, PM-31",
+      "sortOrder": 1,
+      "categoryId": "GV.OV"
+    },
+    {
+      "id": "GV.OV-02",
+      "name": "GV.OV-02",
+      "description": "The cybersecurity risk management strategy is reviewed and adjusted to ensure coverage of organizational requirements and risks",
+      "implementationExamples": "Ex1: Assess strategy coverage against organizational requirements Ex2: Identify gaps in risk management coverage Ex3: Adjust strategy to address identified gaps",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-9, PM-28",
+      "sortOrder": 2,
+      "categoryId": "GV.OV"
+    },
+    {
+      "id": "GV.OV-03",
+      "name": "GV.OV-03",
+      "description": "Organizational cybersecurity risk management performance is evaluated and reviewed for adjustments needed",
+      "implementationExamples": "Ex1: Define performance metrics for cybersecurity risk management Ex2: Evaluate performance against established metrics Ex3: Identify and implement needed adjustments",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-9, PM-14, PM-31",
+      "sortOrder": 3,
+      "categoryId": "GV.OV"
+    },
+    {
+      "id": "GV.SC-01",
+      "name": "GV.SC-01",
+      "description": "A cybersecurity supply chain risk management program, strategy, objectives, policies, and processes are established and agreed to by organizational stakeholders",
+      "implementationExamples": "Ex1: Establish a supply chain risk management program Ex2: Define supply chain risk management objectives Ex3: Obtain stakeholder agreement on supply chain risk policies",
+      "informativeReferences": "CIS Controls v8: 15.1 | NIST SP 800-53 Rev 5: SR-1, SR-2, SR-3",
+      "sortOrder": 1,
+      "categoryId": "GV.SC"
+    },
+    {
+      "id": "GV.SC-02",
+      "name": "GV.SC-02",
+      "description": "Cybersecurity roles and responsibilities for suppliers, customers, and partners are established, communicated, and coordinated internally and externally",
+      "implementationExamples": "Ex1: Define cybersecurity roles for suppliers and partners Ex2: Communicate expectations to third parties Ex3: Coordinate cybersecurity responsibilities across the supply chain",
+      "informativeReferences": "CIS Controls v8: 15.2 | NIST SP 800-53 Rev 5: SR-1, SR-2, SR-3, SR-5",
+      "sortOrder": 2,
+      "categoryId": "GV.SC"
+    },
+    {
+      "id": "GV.SC-03",
+      "name": "GV.SC-03",
+      "description": "Cybersecurity supply chain risk management is integrated into cybersecurity and enterprise risk management, risk assessment, and improvement processes",
+      "implementationExamples": "Ex1: Integrate supply chain risk into enterprise risk assessments Ex2: Include supply chain considerations in improvement processes Ex3: Align supply chain risk management with overall cybersecurity strategy",
+      "informativeReferences": "CIS Controls v8: 15.1 | NIST SP 800-53 Rev 5: SR-1, SR-2, SR-3",
+      "sortOrder": 3,
+      "categoryId": "GV.SC"
+    },
+    {
+      "id": "GV.SC-04",
+      "name": "GV.SC-04",
+      "description": "Suppliers are known and prioritized by criticality",
+      "implementationExamples": "Ex1: Maintain an inventory of suppliers Ex2: Assess supplier criticality based on dependency and risk Ex3: Prioritize supplier oversight based on criticality assessment",
+      "informativeReferences": "CIS Controls v8: 15.1, 15.3 | NIST SP 800-53 Rev 5: SR-2, SR-6",
+      "sortOrder": 4,
+      "categoryId": "GV.SC"
+    },
+    {
+      "id": "GV.SC-05",
+      "name": "GV.SC-05",
+      "description": "Requirements to address cybersecurity risks in supply chains are established, prioritized, and integrated into contracts and other agreements with suppliers and other relevant third parties",
+      "implementationExamples": "Ex1: Define cybersecurity requirements for supplier contracts Ex2: Prioritize requirements based on risk Ex3: Include cybersecurity clauses in all relevant agreements",
+      "informativeReferences": "CIS Controls v8: 15.2, 15.4 | NIST SP 800-53 Rev 5: SR-2, SR-3, SR-5",
+      "sortOrder": 5,
+      "categoryId": "GV.SC"
+    },
+    {
+      "id": "GV.SC-06",
+      "name": "GV.SC-06",
+      "description": "Planning and due diligence are performed to reduce risks before entering into formal supplier or other third-party relationships",
+      "implementationExamples": "Ex1: Conduct due diligence assessments of potential suppliers Ex2: Evaluate supplier cybersecurity posture before engagement Ex3: Document risk acceptance decisions for supplier relationships",
+      "informativeReferences": "CIS Controls v8: 15.3, 15.4 | NIST SP 800-53 Rev 5: SR-3, SR-5, SR-6",
+      "sortOrder": 6,
+      "categoryId": "GV.SC"
+    },
+    {
+      "id": "GV.SC-07",
+      "name": "GV.SC-07",
+      "description": "The risks posed by a supplier, their products and services, and other third parties are understood, recorded, prioritized, assessed, responded to, and monitored over the course of the relationship",
+      "implementationExamples": "Ex1: Continuously monitor supplier cybersecurity risks Ex2: Assess and record supplier risk changes Ex3: Respond to identified supplier risks appropriately",
+      "informativeReferences": "CIS Controls v8: 15.4, 15.5 | NIST SP 800-53 Rev 5: SR-3, SR-5, SR-6",
+      "sortOrder": 7,
+      "categoryId": "GV.SC"
+    },
+    {
+      "id": "GV.SC-08",
+      "name": "GV.SC-08",
+      "description": "Relevant suppliers and other third parties are included in incident planning, response, and recovery activities",
+      "implementationExamples": "Ex1: Include critical suppliers in incident response planning Ex2: Establish communication protocols with suppliers for incidents Ex3: Coordinate recovery activities with affected third parties",
+      "informativeReferences": "CIS Controls v8: 15.5, 17.1 | NIST SP 800-53 Rev 5: IR-4, SR-8",
+      "sortOrder": 8,
+      "categoryId": "GV.SC"
+    },
+    {
+      "id": "GV.SC-09",
+      "name": "GV.SC-09",
+      "description": "Supply chain security practices are integrated into cybersecurity and enterprise risk management programs, and their performance is monitored throughout the technology product and service life cycle",
+      "implementationExamples": "Ex1: Integrate supply chain security into the product life cycle Ex2: Monitor supply chain security performance metrics Ex3: Review and improve supply chain practices regularly",
+      "informativeReferences": "CIS Controls v8: 15.1, 15.5 | NIST SP 800-53 Rev 5: SR-1, SR-2, SR-11",
+      "sortOrder": 9,
+      "categoryId": "GV.SC"
+    },
+    {
+      "id": "GV.SC-10",
+      "name": "GV.SC-10",
+      "description": "Cybersecurity supply chain risk management plans include provisions for activities that occur after the conclusion of a partnership or service agreement",
+      "implementationExamples": "Ex1: Plan for data return or destruction at end of supplier relationship Ex2: Address access revocation upon contract termination Ex3: Document transition procedures for supplier changes",
+      "informativeReferences": "CIS Controls v8: 15.5 | NIST SP 800-53 Rev 5: SR-2, SR-3",
+      "sortOrder": 10,
+      "categoryId": "GV.SC"
+    },
+    {
+      "id": "ID.AM-01",
+      "name": "ID.AM-01",
+      "description": "Inventories of hardware managed by the organization are maintained",
+      "implementationExamples": "Ex1: Maintain an inventory of all organizational hardware assets Ex2: Use automated tools to discover and catalog hardware Ex3: Regularly reconcile hardware inventory with physical assets",
+      "informativeReferences": "CIS Controls v8: 1.1, 1.2 | NIST SP 800-53 Rev 5: CM-8",
+      "sortOrder": 1,
+      "categoryId": "ID.AM"
+    },
+    {
+      "id": "ID.AM-02",
+      "name": "ID.AM-02",
+      "description": "Inventories of software, services, and systems managed by the organization are maintained",
+      "implementationExamples": "Ex1: Maintain an inventory of all software and services Ex2: Use automated tools to discover installed software Ex3: Track software licenses and versions",
+      "informativeReferences": "CIS Controls v8: 2.1, 2.2 | NIST SP 800-53 Rev 5: CM-8",
+      "sortOrder": 2,
+      "categoryId": "ID.AM"
+    },
+    {
+      "id": "ID.AM-03",
+      "name": "ID.AM-03",
+      "description": "Representations of the organization's authorized network communication and internal and external network data flows are maintained",
+      "implementationExamples": "Ex1: Document authorized network communication flows Ex2: Maintain network architecture diagrams Ex3: Identify and document external data flows",
+      "informativeReferences": "CIS Controls v8: 12.2, 12.4 | NIST SP 800-53 Rev 5: AC-4, CM-8",
+      "sortOrder": 3,
+      "categoryId": "ID.AM"
+    },
+    {
+      "id": "ID.AM-04",
+      "name": "ID.AM-04",
+      "description": "Inventories of services provided by suppliers are maintained",
+      "implementationExamples": "Ex1: Catalog all third-party services used by the organization Ex2: Document service dependencies and data flows Ex3: Track supplier service agreements and SLAs",
+      "informativeReferences": "CIS Controls v8: 15.1 | NIST SP 800-53 Rev 5: CM-8, SR-2",
+      "sortOrder": 4,
+      "categoryId": "ID.AM"
+    },
+    {
+      "id": "ID.AM-05",
+      "name": "ID.AM-05",
+      "description": "Assets are prioritized based on classification, criticality, resources, and impact to the mission",
+      "implementationExamples": "Ex1: Classify assets based on data sensitivity and business impact Ex2: Prioritize assets for protection based on criticality Ex3: Allocate security resources based on asset priority",
+      "informativeReferences": "CIS Controls v8: 1.1, 2.1 | NIST SP 800-53 Rev 5: RA-2, SC-6",
+      "sortOrder": 5,
+      "categoryId": "ID.AM"
+    },
+    {
+      "id": "ID.AM-07",
+      "name": "ID.AM-07",
+      "description": "Inventories of data and corresponding metadata for designated data types are maintained",
+      "implementationExamples": "Ex1: Maintain inventories of sensitive data and its locations Ex2: Catalog data types and their classification levels Ex3: Track data flows and storage locations",
+      "informativeReferences": "CIS Controls v8: 3.1, 3.2 | NIST SP 800-53 Rev 5: CM-8, CM-12, CM-13",
+      "sortOrder": 6,
+      "categoryId": "ID.AM"
+    },
+    {
+      "id": "ID.AM-08",
+      "name": "ID.AM-08",
+      "description": "Systems, hardware, software, services, and data are managed throughout their life cycles",
+      "implementationExamples": "Ex1: Implement asset lifecycle management processes Ex2: Track assets from acquisition through disposal Ex3: Ensure secure decommissioning of end-of-life assets",
+      "informativeReferences": "CIS Controls v8: 1.1, 2.1 | NIST SP 800-53 Rev 5: CM-8, SA-22",
+      "sortOrder": 7,
+      "categoryId": "ID.AM"
+    },
+    {
+      "id": "ID.RA-01",
+      "name": "ID.RA-01",
+      "description": "Vulnerabilities in assets are identified, validated, and recorded",
+      "implementationExamples": "Ex1: Conduct regular vulnerability scans Ex2: Validate identified vulnerabilities Ex3: Record vulnerabilities in a tracking system",
+      "informativeReferences": "CIS Controls v8: 7.1, 7.2, 7.3, 7.4 | NIST SP 800-53 Rev 5: CA-2, CA-8, RA-5, SI-4",
+      "sortOrder": 1,
+      "categoryId": "ID.RA"
+    },
+    {
+      "id": "ID.RA-02",
+      "name": "ID.RA-02",
+      "description": "Cyber threat intelligence is received from information sharing forums and sources",
+      "implementationExamples": "Ex1: Subscribe to threat intelligence feeds Ex2: Participate in information sharing organizations Ex3: Integrate threat intelligence into risk assessments",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PM-16, RA-3, SI-5",
+      "sortOrder": 2,
+      "categoryId": "ID.RA"
+    },
+    {
+      "id": "ID.RA-03",
+      "name": "ID.RA-03",
+      "description": "Internal and external threats to the organization are identified and recorded",
+      "implementationExamples": "Ex1: Identify potential internal threat sources Ex2: Identify potential external threat actors Ex3: Document and categorize identified threats",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: RA-3, PM-12, PM-16",
+      "sortOrder": 3,
+      "categoryId": "ID.RA"
+    },
+    {
+      "id": "ID.RA-04",
+      "name": "ID.RA-04",
+      "description": "Potential impacts and likelihoods of threats exploiting vulnerabilities are identified and recorded",
+      "implementationExamples": "Ex1: Assess likelihood of threat exploitation Ex2: Determine potential business impact of exploitation Ex3: Document risk scenarios with impact and likelihood ratings",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: RA-3, RA-5",
+      "sortOrder": 4,
+      "categoryId": "ID.RA"
+    },
+    {
+      "id": "ID.RA-05",
+      "name": "ID.RA-05",
+      "description": "Threats, vulnerabilities, likelihoods, and impacts are used to understand inherent risk and inform risk response prioritization",
+      "implementationExamples": "Ex1: Calculate inherent risk from threat and vulnerability data Ex2: Prioritize risk responses based on risk levels Ex3: Document risk response decisions and rationale",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: RA-3, PM-9",
+      "sortOrder": 5,
+      "categoryId": "ID.RA"
+    },
+    {
+      "id": "ID.RA-06",
+      "name": "ID.RA-06",
+      "description": "Risk responses are chosen, prioritized, planned, tracked, and communicated",
+      "implementationExamples": "Ex1: Select appropriate risk response for each identified risk Ex2: Develop and track risk response plans Ex3: Communicate risk response status to stakeholders",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: RA-7, PM-4",
+      "sortOrder": 6,
+      "categoryId": "ID.RA"
+    },
+    {
+      "id": "ID.RA-07",
+      "name": "ID.RA-07",
+      "description": "Changes and exceptions are managed, assessed for risk impact, recorded, and tracked",
+      "implementationExamples": "Ex1: Assess cybersecurity risk impact of proposed changes Ex2: Document and track risk exceptions Ex3: Review exceptions periodically for continued validity",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: CA-7, CM-3, CM-4",
+      "sortOrder": 7,
+      "categoryId": "ID.RA"
+    },
+    {
+      "id": "ID.RA-08",
+      "name": "ID.RA-08",
+      "description": "Processes for receiving, analyzing, and responding to vulnerability disclosures are established",
+      "implementationExamples": "Ex1: Establish a vulnerability disclosure program Ex2: Define processes for analyzing disclosed vulnerabilities Ex3: Implement response procedures for vulnerability disclosures",
+      "informativeReferences": "CIS Controls v8: 7.5 | NIST SP 800-53 Rev 5: RA-5, SI-2, SI-5",
+      "sortOrder": 8,
+      "categoryId": "ID.RA"
+    },
+    {
+      "id": "ID.RA-09",
+      "name": "ID.RA-09",
+      "description": "The authenticity and integrity of hardware and software are assessed prior to acquisition and use",
+      "implementationExamples": "Ex1: Verify software integrity before installation Ex2: Validate hardware authenticity from suppliers Ex3: Use trusted sources for software acquisition",
+      "informativeReferences": "CIS Controls v8: 2.3, 2.5 | NIST SP 800-53 Rev 5: RA-3, SR-4, SR-11",
+      "sortOrder": 9,
+      "categoryId": "ID.RA"
+    },
+    {
+      "id": "ID.RA-10",
+      "name": "ID.RA-10",
+      "description": "Critical suppliers are assessed prior to acquisition",
+      "implementationExamples": "Ex1: Conduct security assessments of critical suppliers Ex2: Evaluate supplier security certifications and practices Ex3: Include security criteria in supplier selection process",
+      "informativeReferences": "CIS Controls v8: 15.3, 15.4 | NIST SP 800-53 Rev 5: RA-3, SR-3, SR-5, SR-6",
+      "sortOrder": 10,
+      "categoryId": "ID.RA"
+    },
+    {
+      "id": "ID.IM-01",
+      "name": "ID.IM-01",
+      "description": "Improvements are identified from evaluations",
+      "implementationExamples": "Ex1: Conduct periodic evaluations of cybersecurity processes Ex2: Identify improvement opportunities from evaluation results Ex3: Document and prioritize identified improvements",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: CA-2, CA-7, PM-4, PM-14",
+      "sortOrder": 1,
+      "categoryId": "ID.IM"
+    },
+    {
+      "id": "ID.IM-02",
+      "name": "ID.IM-02",
+      "description": "Improvements are identified from security tests and exercises, including those done in coordination with suppliers and relevant third parties",
+      "implementationExamples": "Ex1: Conduct regular security testing and exercises Ex2: Include suppliers in security exercises Ex3: Document lessons learned and improvement actions",
+      "informativeReferences": "CIS Controls v8: 17.1, 17.6 | NIST SP 800-53 Rev 5: CA-2, CA-8, CP-4, IR-3",
+      "sortOrder": 2,
+      "categoryId": "ID.IM"
+    },
+    {
+      "id": "ID.IM-03",
+      "name": "ID.IM-03",
+      "description": "Improvements are identified from execution of operational processes, procedures, and activities",
+      "implementationExamples": "Ex1: Review operational processes for cybersecurity improvements Ex2: Collect feedback from operational teams Ex3: Implement process improvements based on operational experience",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: CA-2, CA-7, PM-4",
+      "sortOrder": 3,
+      "categoryId": "ID.IM"
+    },
+    {
+      "id": "ID.IM-04",
+      "name": "ID.IM-04",
+      "description": "Incident response plans and other cybersecurity plans that affect operations are established, communicated, maintained, and improved",
+      "implementationExamples": "Ex1: Develop and maintain incident response plans Ex2: Communicate plans to relevant personnel Ex3: Improve plans based on lessons learned from incidents and exercises",
+      "informativeReferences": "CIS Controls v8: 17.4 | NIST SP 800-53 Rev 5: CP-2, IR-8, PM-8",
+      "sortOrder": 4,
+      "categoryId": "ID.IM"
+    },
+    {
+      "id": "PR.AA-01",
+      "name": "PR.AA-01",
+      "description": "Identities and credentials for authorized users, services, and hardware are managed by the organization",
+      "implementationExamples": "Ex1: Implement identity lifecycle management processes Ex2: Manage credentials including issuance, rotation, and revocation Ex3: Maintain identity records for all authorized entities",
+      "informativeReferences": "CIS Controls v8: 5.1, 5.2, 5.3 | NIST SP 800-53 Rev 5: IA-1, IA-2, IA-3, IA-4, IA-5, IA-8",
+      "sortOrder": 1,
+      "categoryId": "PR.AA"
+    },
+    {
+      "id": "PR.AA-02",
+      "name": "PR.AA-02",
+      "description": "Identities are proofed and bound to credentials based on the context of interactions",
+      "implementationExamples": "Ex1: Implement identity proofing procedures appropriate to risk level Ex2: Bind verified identities to issued credentials Ex3: Verify identity before granting access to sensitive resources",
+      "informativeReferences": "CIS Controls v8: 5.1, 5.2 | NIST SP 800-53 Rev 5: IA-1, IA-2, IA-5, IA-12",
+      "sortOrder": 2,
+      "categoryId": "PR.AA"
+    },
+    {
+      "id": "PR.AA-03",
+      "name": "PR.AA-03",
+      "description": "Users, services, and hardware are authenticated",
+      "implementationExamples": "Ex1: Implement multi-factor authentication for privileged access Ex2: Authenticate all users before granting system access Ex3: Implement device authentication for network access",
+      "informativeReferences": "CIS Controls v8: 5.2, 5.4, 6.3, 6.4, 6.5 | NIST SP 800-53 Rev 5: IA-2, IA-3, IA-8, IA-9",
+      "sortOrder": 3,
+      "categoryId": "PR.AA"
+    },
+    {
+      "id": "PR.AA-04",
+      "name": "PR.AA-04",
+      "description": "Identity assertions are protected, conveyed, and verified",
+      "implementationExamples": "Ex1: Protect identity assertions during transmission Ex2: Verify identity assertions before granting access Ex3: Implement secure token management for identity assertions",
+      "informativeReferences": "CIS Controls v8: 5.6 | NIST SP 800-53 Rev 5: IA-2, IA-5, SC-12, SC-13",
+      "sortOrder": 4,
+      "categoryId": "PR.AA"
+    },
+    {
+      "id": "PR.AA-05",
+      "name": "PR.AA-05",
+      "description": "Access permissions, entitlements, and authorizations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties",
+      "implementationExamples": "Ex1: Define access control policies based on least privilege Ex2: Implement separation of duties for critical functions Ex3: Review and recertify access permissions periodically",
+      "informativeReferences": "CIS Controls v8: 3.3, 5.4, 6.1, 6.2, 6.8 | NIST SP 800-53 Rev 5: AC-1, AC-2, AC-3, AC-6, AC-24",
+      "sortOrder": 5,
+      "categoryId": "PR.AA"
+    },
+    {
+      "id": "PR.AA-06",
+      "name": "PR.AA-06",
+      "description": "Physical access to assets is managed, monitored, and enforced commensurate with risk",
+      "implementationExamples": "Ex1: Implement physical access controls for sensitive areas Ex2: Monitor physical access to critical assets Ex3: Review and update physical access authorizations",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PE-1, PE-2, PE-3, PE-4, PE-5, PE-6",
+      "sortOrder": 6,
+      "categoryId": "PR.AA"
+    },
+    {
+      "id": "PR.AT-01",
+      "name": "PR.AT-01",
+      "description": "Personnel are provided with awareness and training so that they possess the knowledge and skills to perform general tasks with cybersecurity risks in mind",
+      "implementationExamples": "Ex1: Conduct regular cybersecurity awareness training for all personnel Ex2: Include cybersecurity topics in new employee orientation Ex3: Test awareness through simulated phishing exercises",
+      "informativeReferences": "CIS Controls v8: 14.1, 14.2, 14.3 | NIST SP 800-53 Rev 5: AT-1, AT-2, AT-3, AT-4",
+      "sortOrder": 1,
+      "categoryId": "PR.AT"
+    },
+    {
+      "id": "PR.AT-02",
+      "name": "PR.AT-02",
+      "description": "Individuals in specialized roles are provided with awareness and training so that they possess the knowledge and skills to perform relevant tasks with cybersecurity risks in mind",
+      "implementationExamples": "Ex1: Provide role-specific cybersecurity training for IT staff Ex2: Train developers on secure coding practices Ex3: Provide incident response training for security team members",
+      "informativeReferences": "CIS Controls v8: 14.9 | NIST SP 800-53 Rev 5: AT-2, AT-3, AT-4",
+      "sortOrder": 2,
+      "categoryId": "PR.AT"
+    },
+    {
+      "id": "PR.DS-01",
+      "name": "PR.DS-01",
+      "description": "The confidentiality, integrity, and availability of data-at-rest are protected",
+      "implementationExamples": "Ex1: Encrypt sensitive data at rest Ex2: Implement access controls for stored data Ex3: Use integrity verification for critical data stores",
+      "informativeReferences": "CIS Controls v8: 3.6, 3.7, 3.11 | NIST SP 800-53 Rev 5: SC-28",
+      "sortOrder": 1,
+      "categoryId": "PR.DS"
+    },
+    {
+      "id": "PR.DS-02",
+      "name": "PR.DS-02",
+      "description": "The confidentiality, integrity, and availability of data-in-transit are protected",
+      "implementationExamples": "Ex1: Encrypt data in transit using TLS/SSL Ex2: Implement VPN for remote access communications Ex3: Verify data integrity during transmission",
+      "informativeReferences": "CIS Controls v8: 3.10 | NIST SP 800-53 Rev 5: SC-8, SC-13",
+      "sortOrder": 2,
+      "categoryId": "PR.DS"
+    },
+    {
+      "id": "PR.DS-10",
+      "name": "PR.DS-10",
+      "description": "The confidentiality, integrity, and availability of data-in-use are protected",
+      "implementationExamples": "Ex1: Implement memory protection mechanisms Ex2: Use secure enclaves for sensitive processing Ex3: Protect data during active processing",
+      "informativeReferences": "CIS Controls v8: 3.6 | NIST SP 800-53 Rev 5: SC-28",
+      "sortOrder": 3,
+      "categoryId": "PR.DS"
+    },
+    {
+      "id": "PR.DS-11",
+      "name": "PR.DS-11",
+      "description": "Backups of data are created, protected, maintained, and tested",
+      "implementationExamples": "Ex1: Implement regular backup schedules for critical data Ex2: Protect backup data with encryption and access controls Ex3: Test backup restoration procedures periodically",
+      "informativeReferences": "CIS Controls v8: 11.1, 11.2, 11.3, 11.4, 11.5 | NIST SP 800-53 Rev 5: CP-9, CP-10",
+      "sortOrder": 4,
+      "categoryId": "PR.DS"
+    },
+    {
+      "id": "PR.PS-01",
+      "name": "PR.PS-01",
+      "description": "Configuration management practices are established and applied",
+      "implementationExamples": "Ex1: Establish secure baseline configurations for all platforms Ex2: Implement configuration management tools and processes Ex3: Monitor for configuration drift from baselines",
+      "informativeReferences": "CIS Controls v8: 4.1, 4.2, 4.3, 4.4, 4.5 | NIST SP 800-53 Rev 5: CM-1, CM-2, CM-3, CM-6, CM-7",
+      "sortOrder": 1,
+      "categoryId": "PR.PS"
+    },
+    {
+      "id": "PR.PS-02",
+      "name": "PR.PS-02",
+      "description": "Software is maintained, replaced, and removed commensurate with risk",
+      "implementationExamples": "Ex1: Apply security patches in a timely manner Ex2: Replace end-of-life software with supported versions Ex3: Remove unauthorized or unnecessary software",
+      "informativeReferences": "CIS Controls v8: 2.3, 7.1, 7.2, 7.3, 7.4 | NIST SP 800-53 Rev 5: CM-3, CM-7, SI-2, SA-22",
+      "sortOrder": 2,
+      "categoryId": "PR.PS"
+    },
+    {
+      "id": "PR.PS-03",
+      "name": "PR.PS-03",
+      "description": "Hardware is maintained, replaced, and removed commensurate with risk",
+      "implementationExamples": "Ex1: Maintain hardware according to manufacturer recommendations Ex2: Replace hardware that can no longer be secured Ex3: Securely dispose of decommissioned hardware",
+      "informativeReferences": "CIS Controls v8: 1.1, 1.2 | NIST SP 800-53 Rev 5: CM-8, MA-2, MA-3, MA-6, SA-22",
+      "sortOrder": 3,
+      "categoryId": "PR.PS"
+    },
+    {
+      "id": "PR.PS-04",
+      "name": "PR.PS-04",
+      "description": "Log records are generated and made available for continuous monitoring",
+      "implementationExamples": "Ex1: Enable logging on all critical systems and applications Ex2: Centralize log collection for analysis Ex3: Ensure log integrity and availability for investigation",
+      "informativeReferences": "CIS Controls v8: 8.1, 8.2, 8.3, 8.5 | NIST SP 800-53 Rev 5: AU-1, AU-2, AU-3, AU-6, AU-12",
+      "sortOrder": 4,
+      "categoryId": "PR.PS"
+    },
+    {
+      "id": "PR.PS-05",
+      "name": "PR.PS-05",
+      "description": "Installation and execution of unauthorized software is prevented",
+      "implementationExamples": "Ex1: Implement application whitelisting on critical systems Ex2: Use software restriction policies Ex3: Monitor for and block unauthorized software execution",
+      "informativeReferences": "CIS Controls v8: 2.5, 2.6, 2.7 | NIST SP 800-53 Rev 5: CM-7, CM-11, SI-7",
+      "sortOrder": 5,
+      "categoryId": "PR.PS"
+    },
+    {
+      "id": "PR.PS-06",
+      "name": "PR.PS-06",
+      "description": "Secure software development practices are integrated, and their performance is monitored throughout the software development life cycle",
+      "implementationExamples": "Ex1: Implement secure SDLC practices Ex2: Conduct code reviews and security testing Ex3: Monitor development practices for compliance with security standards",
+      "informativeReferences": "CIS Controls v8: 16.1, 16.2, 16.3, 16.4 | NIST SP 800-53 Rev 5: SA-3, SA-4, SA-8, SA-10, SA-11, SA-15",
+      "sortOrder": 6,
+      "categoryId": "PR.PS"
+    },
+    {
+      "id": "PR.IR-01",
+      "name": "PR.IR-01",
+      "description": "Networks and environments are protected from unauthorized logical access and usage",
+      "implementationExamples": "Ex1: Implement network segmentation and access controls Ex2: Deploy firewalls and intrusion prevention systems Ex3: Monitor network traffic for unauthorized access attempts",
+      "informativeReferences": "CIS Controls v8: 4.4, 12.1, 12.2, 12.3, 13.1, 13.4 | NIST SP 800-53 Rev 5: AC-4, SC-7",
+      "sortOrder": 1,
+      "categoryId": "PR.IR"
+    },
+    {
+      "id": "PR.IR-02",
+      "name": "PR.IR-02",
+      "description": "The organization's technology assets are protected from environmental threats",
+      "implementationExamples": "Ex1: Implement environmental controls (HVAC, fire suppression) Ex2: Protect against power disruptions with UPS and generators Ex3: Monitor environmental conditions in data centers",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PE-9, PE-10, PE-11, PE-12, PE-13, PE-14",
+      "sortOrder": 2,
+      "categoryId": "PR.IR"
+    },
+    {
+      "id": "PR.IR-03",
+      "name": "PR.IR-03",
+      "description": "Mechanisms are implemented to achieve resilience requirements in normal and adverse situations",
+      "implementationExamples": "Ex1: Implement redundancy for critical systems Ex2: Design systems for graceful degradation under stress Ex3: Test resilience mechanisms through exercises",
+      "informativeReferences": "CIS Controls v8: 11.1, 11.2, 11.3, 11.4, 11.5 | NIST SP 800-53 Rev 5: CP-7, CP-8, CP-9, CP-10, CP-11, SC-5, SC-6",
+      "sortOrder": 3,
+      "categoryId": "PR.IR"
+    },
+    {
+      "id": "PR.IR-04",
+      "name": "PR.IR-04",
+      "description": "Adequate resource capacity to ensure availability is maintained",
+      "implementationExamples": "Ex1: Monitor resource utilization and plan for capacity needs Ex2: Implement auto-scaling for critical services Ex3: Conduct capacity planning for anticipated growth",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: CP-2, PE-11, SC-5, SC-6",
+      "sortOrder": 4,
+      "categoryId": "PR.IR"
+    },
+    {
+      "id": "DE.CM-01",
+      "name": "DE.CM-01",
+      "description": "Networks and network services are monitored to find potentially adverse events",
+      "implementationExamples": "Ex1: Deploy network monitoring tools and sensors Ex2: Monitor network traffic for anomalies and threats Ex3: Establish baselines for normal network behavior",
+      "informativeReferences": "CIS Controls v8: 8.2, 13.3, 13.6 | NIST SP 800-53 Rev 5: AU-12, SI-4",
+      "sortOrder": 1,
+      "categoryId": "DE.CM"
+    },
+    {
+      "id": "DE.CM-02",
+      "name": "DE.CM-02",
+      "description": "The physical environment is monitored to find potentially adverse events",
+      "implementationExamples": "Ex1: Deploy physical security monitoring systems Ex2: Monitor access to sensitive physical areas Ex3: Review physical security alerts and events",
+      "informativeReferences": "CIS Controls v8: 0 | NIST SP 800-53 Rev 5: PE-6, PE-8",
+      "sortOrder": 2,
+      "categoryId": "DE.CM"
+    },
+    {
+      "id": "DE.CM-03",
+      "name": "DE.CM-03",
+      "description": "Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events",
+      "implementationExamples": "Ex1: Deploy endpoint detection and response tools Ex2: Monitor system logs for suspicious activity Ex3: Implement file integrity monitoring on critical systems",
+      "informativeReferences": "CIS Controls v8: 8.2, 8.5, 8.6, 8.7 | NIST SP 800-53 Rev 5: AU-12, CM-3, SI-4, SI-7",
+      "sortOrder": 3,
+      "categoryId": "DE.CM"
+    },
+    {
+      "id": "DE.CM-06",
+      "name": "DE.CM-06",
+      "description": "External service provider activities and services are monitored to find potentially adverse events",
+      "implementationExamples": "Ex1: Monitor third-party service provider activities Ex2: Review service provider security reports and alerts Ex3: Establish monitoring requirements in service agreements",
+      "informativeReferences": "CIS Controls v8: 15.4 | NIST SP 800-53 Rev 5: AU-12, CA-7, SA-9, SI-4",
+      "sortOrder": 4,
+      "categoryId": "DE.CM"
+    },
+    {
+      "id": "DE.AE-02",
+      "name": "DE.AE-02",
+      "description": "Potentially adverse events are analyzed to better understand associated activities",
+      "implementationExamples": "Ex1: Analyze security events to determine scope and impact Ex2: Correlate events across multiple data sources Ex3: Investigate anomalies to determine if they represent threats",
+      "informativeReferences": "CIS Controls v8: 8.8, 8.11 | NIST SP 800-53 Rev 5: AU-6, IR-4, SI-4",
+      "sortOrder": 1,
+      "categoryId": "DE.AE"
+    },
+    {
+      "id": "DE.AE-03",
+      "name": "DE.AE-03",
+      "description": "Information is correlated from multiple sources",
+      "implementationExamples": "Ex1: Aggregate security data from multiple monitoring sources Ex2: Use SIEM tools to correlate events across systems Ex3: Combine threat intelligence with internal monitoring data",
+      "informativeReferences": "CIS Controls v8: 8.8, 8.11 | NIST SP 800-53 Rev 5: AU-6, IR-4, SI-4",
+      "sortOrder": 2,
+      "categoryId": "DE.AE"
+    },
+    {
+      "id": "DE.AE-04",
+      "name": "DE.AE-04",
+      "description": "The estimated impact and scope of adverse events are understood",
+      "implementationExamples": "Ex1: Assess the potential impact of detected adverse events Ex2: Determine the scope of affected systems and data Ex3: Estimate business impact of security events",
+      "informativeReferences": "CIS Controls v8: 8.8 | NIST SP 800-53 Rev 5: CP-2, IR-4, IR-5",
+      "sortOrder": 3,
+      "categoryId": "DE.AE"
+    },
+    {
+      "id": "DE.AE-06",
+      "name": "DE.AE-06",
+      "description": "Information on adverse events is provided to authorized staff and tools",
+      "implementationExamples": "Ex1: Distribute event information to incident response teams Ex2: Feed event data to automated analysis tools Ex3: Ensure timely notification of relevant personnel",
+      "informativeReferences": "CIS Controls v8: 8.8, 8.11 | NIST SP 800-53 Rev 5: AU-6, IR-4, IR-6",
+      "sortOrder": 4,
+      "categoryId": "DE.AE"
+    },
+    {
+      "id": "DE.AE-07",
+      "name": "DE.AE-07",
+      "description": "Cyber threat intelligence and other contextual information are integrated into the analysis",
+      "implementationExamples": "Ex1: Incorporate threat intelligence into event analysis Ex2: Use contextual information to prioritize events Ex3: Map observed indicators to known threat patterns",
+      "informativeReferences": "CIS Controls v8: 8.11 | NIST SP 800-53 Rev 5: PM-16, RA-3, SI-5",
+      "sortOrder": 5,
+      "categoryId": "DE.AE"
+    },
+    {
+      "id": "DE.AE-08",
+      "name": "DE.AE-08",
+      "description": "Incidents are declared when adverse events meet the defined incident criteria",
+      "implementationExamples": "Ex1: Define clear criteria for incident declaration Ex2: Escalate events that meet incident thresholds Ex3: Document incident declaration decisions and rationale",
+      "informativeReferences": "CIS Controls v8: 17.2 | NIST SP 800-53 Rev 5: IR-4, IR-5",
+      "sortOrder": 6,
+      "categoryId": "DE.AE"
+    },
+    {
+      "id": "RS.MA-01",
+      "name": "RS.MA-01",
+      "description": "The incident response plan is executed in coordination with relevant third parties once an incident is declared",
+      "implementationExamples": "Ex1: Activate incident response plan upon incident declaration Ex2: Coordinate response activities with relevant third parties Ex3: Follow established procedures for incident handling",
+      "informativeReferences": "CIS Controls v8: 17.1, 17.4 | NIST SP 800-53 Rev 5: IR-1, IR-4, IR-8",
+      "sortOrder": 1,
+      "categoryId": "RS.MA"
+    },
+    {
+      "id": "RS.MA-02",
+      "name": "RS.MA-02",
+      "description": "Incident reports are triaged and validated",
+      "implementationExamples": "Ex1: Triage incoming incident reports by severity Ex2: Validate reported incidents through investigation Ex3: Prioritize incident response based on impact assessment",
+      "informativeReferences": "CIS Controls v8: 17.2, 17.3 | NIST SP 800-53 Rev 5: IR-4, IR-5",
+      "sortOrder": 2,
+      "categoryId": "RS.MA"
+    },
+    {
+      "id": "RS.MA-03",
+      "name": "RS.MA-03",
+      "description": "Incidents are categorized and prioritized",
+      "implementationExamples": "Ex1: Categorize incidents by type and affected systems Ex2: Assign priority levels based on impact and urgency Ex3: Allocate response resources based on incident priority",
+      "informativeReferences": "CIS Controls v8: 17.2, 17.3 | NIST SP 800-53 Rev 5: IR-4, IR-5",
+      "sortOrder": 3,
+      "categoryId": "RS.MA"
+    },
+    {
+      "id": "RS.MA-04",
+      "name": "RS.MA-04",
+      "description": "Incidents are escalated or elevated as needed",
+      "implementationExamples": "Ex1: Define escalation criteria and procedures Ex2: Escalate incidents that exceed response team capabilities Ex3: Notify leadership of high-severity incidents",
+      "informativeReferences": "CIS Controls v8: 17.3, 17.4 | NIST SP 800-53 Rev 5: IR-4, IR-6",
+      "sortOrder": 4,
+      "categoryId": "RS.MA"
+    },
+    {
+      "id": "RS.MA-05",
+      "name": "RS.MA-05",
+      "description": "The criteria for initiating incident recovery are applied",
+      "implementationExamples": "Ex1: Define criteria for transitioning from response to recovery Ex2: Assess incident containment before initiating recovery Ex3: Coordinate recovery initiation with response teams",
+      "informativeReferences": "CIS Controls v8: 17.4 | NIST SP 800-53 Rev 5: IR-4, CP-10",
+      "sortOrder": 5,
+      "categoryId": "RS.MA"
+    },
+    {
+      "id": "RS.AN-03",
+      "name": "RS.AN-03",
+      "description": "Analysis is performed to establish what has taken place during an incident and root cause of the incident",
+      "implementationExamples": "Ex1: Conduct root cause analysis for incidents Ex2: Determine the timeline of incident activities Ex3: Identify attack vectors and methods used",
+      "informativeReferences": "CIS Controls v8: 17.5 | NIST SP 800-53 Rev 5: IR-4, IR-5",
+      "sortOrder": 1,
+      "categoryId": "RS.AN"
+    },
+    {
+      "id": "RS.AN-06",
+      "name": "RS.AN-06",
+      "description": "Actions performed during an investigation are recorded, and the records' integrity and provenance are preserved",
+      "implementationExamples": "Ex1: Document all investigation activities and findings Ex2: Maintain chain of custody for digital evidence Ex3: Preserve evidence integrity through proper handling procedures",
+      "informativeReferences": "CIS Controls v8: 17.5 | NIST SP 800-53 Rev 5: AU-12, IR-4, IR-5",
+      "sortOrder": 2,
+      "categoryId": "RS.AN"
+    },
+    {
+      "id": "RS.AN-07",
+      "name": "RS.AN-07",
+      "description": "Incident data and metadata are collected, and their integrity and provenance are preserved",
+      "implementationExamples": "Ex1: Collect relevant data from affected systems Ex2: Preserve metadata associated with incident artifacts Ex3: Ensure data collection follows forensic best practices",
+      "informativeReferences": "CIS Controls v8: 17.5 | NIST SP 800-53 Rev 5: AU-12, IR-4, IR-5",
+      "sortOrder": 3,
+      "categoryId": "RS.AN"
+    },
+    {
+      "id": "RS.AN-08",
+      "name": "RS.AN-08",
+      "description": "An incident's magnitude is estimated and validated",
+      "implementationExamples": "Ex1: Assess the scope of systems and data affected Ex2: Validate initial magnitude estimates through investigation Ex3: Update magnitude assessment as new information emerges",
+      "informativeReferences": "CIS Controls v8: 17.5 | NIST SP 800-53 Rev 5: CP-2, IR-4, IR-5",
+      "sortOrder": 4,
+      "categoryId": "RS.AN"
+    },
+    {
+      "id": "RS.CO-02",
+      "name": "RS.CO-02",
+      "description": "Internal and external stakeholders are notified of incidents",
+      "implementationExamples": "Ex1: Notify internal stakeholders according to communication plan Ex2: Report incidents to external parties as required by regulation Ex3: Communicate incident status updates to affected parties",
+      "informativeReferences": "CIS Controls v8: 17.1, 17.6 | NIST SP 800-53 Rev 5: IR-6, IR-7",
+      "sortOrder": 1,
+      "categoryId": "RS.CO"
+    },
+    {
+      "id": "RS.CO-03",
+      "name": "RS.CO-03",
+      "description": "Information is shared with designated internal and external stakeholders",
+      "implementationExamples": "Ex1: Share incident indicators with information sharing partners Ex2: Provide incident details to law enforcement when appropriate Ex3: Coordinate information sharing with sector partners",
+      "informativeReferences": "CIS Controls v8: 17.1, 17.6 | NIST SP 800-53 Rev 5: IR-6, IR-7, PM-15",
+      "sortOrder": 2,
+      "categoryId": "RS.CO"
+    },
+    {
+      "id": "RS.CO-04",
+      "name": "RS.CO-04",
+      "description": "Coordination with stakeholders occurs consistent with incident response plans",
+      "implementationExamples": "Ex1: Follow communication protocols defined in incident response plans Ex2: Coordinate with external response organizations Ex3: Maintain consistent messaging across all stakeholder communications",
+      "informativeReferences": "CIS Controls v8: 17.1, 17.6 | NIST SP 800-53 Rev 5: IR-1, IR-4, IR-6",
+      "sortOrder": 3,
+      "categoryId": "RS.CO"
+    },
+    {
+      "id": "RS.MI-01",
+      "name": "RS.MI-01",
+      "description": "Incidents are contained",
+      "implementationExamples": "Ex1: Isolate affected systems to prevent spread Ex2: Block malicious network traffic and communications Ex3: Disable compromised accounts and credentials",
+      "informativeReferences": "CIS Controls v8: 17.3 | NIST SP 800-53 Rev 5: IR-4",
+      "sortOrder": 1,
+      "categoryId": "RS.MI"
+    },
+    {
+      "id": "RS.MI-02",
+      "name": "RS.MI-02",
+      "description": "Incidents are eradicated",
+      "implementationExamples": "Ex1: Remove malware and unauthorized access mechanisms Ex2: Patch exploited vulnerabilities Ex3: Verify complete removal of threat actor presence",
+      "informativeReferences": "CIS Controls v8: 17.3 | NIST SP 800-53 Rev 5: IR-4",
+      "sortOrder": 2,
+      "categoryId": "RS.MI"
+    },
+    {
+      "id": "RC.RP-01",
+      "name": "RC.RP-01",
+      "description": "The recovery portion of the incident response plan is executed once initiated from the incident response process",
+      "implementationExamples": "Ex1: Activate recovery procedures as defined in the plan Ex2: Coordinate recovery activities across affected teams Ex3: Follow established recovery priorities and sequences",
+      "informativeReferences": "CIS Controls v8: 17.4 | NIST SP 800-53 Rev 5: CP-10, IR-4, IR-8",
+      "sortOrder": 1,
+      "categoryId": "RC.RP"
+    },
+    {
+      "id": "RC.RP-02",
+      "name": "RC.RP-02",
+      "description": "Recovery actions are selected, scoped, prioritized, and performed",
+      "implementationExamples": "Ex1: Prioritize recovery of critical systems and services Ex2: Select appropriate recovery methods for each affected system Ex3: Execute recovery actions in priority order",
+      "informativeReferences": "CIS Controls v8: 17.4 | NIST SP 800-53 Rev 5: CP-10, IR-4",
+      "sortOrder": 2,
+      "categoryId": "RC.RP"
+    },
+    {
+      "id": "RC.RP-03",
+      "name": "RC.RP-03",
+      "description": "The integrity of backups and other restoration assets is verified before using them for restoration",
+      "implementationExamples": "Ex1: Verify backup integrity before restoration Ex2: Scan restoration media for malware Ex3: Validate backup data completeness and accuracy",
+      "informativeReferences": "CIS Controls v8: 11.4, 11.5 | NIST SP 800-53 Rev 5: CP-9, CP-10",
+      "sortOrder": 3,
+      "categoryId": "RC.RP"
+    },
+    {
+      "id": "RC.RP-04",
+      "name": "RC.RP-04",
+      "description": "Critical mission functions and cybersecurity risk management are considered to establish post-incident operational norms",
+      "implementationExamples": "Ex1: Assess mission function restoration requirements Ex2: Establish interim operational procedures during recovery Ex3: Define criteria for return to normal operations",
+      "informativeReferences": "CIS Controls v8: 17.4 | NIST SP 800-53 Rev 5: CP-2, CP-10, IR-4",
+      "sortOrder": 4,
+      "categoryId": "RC.RP"
+    },
+    {
+      "id": "RC.RP-05",
+      "name": "RC.RP-05",
+      "description": "The integrity of restored assets is verified, systems and services are restored, and normal operating status is confirmed",
+      "implementationExamples": "Ex1: Verify integrity of restored systems before returning to production Ex2: Conduct testing of restored services Ex3: Confirm normal operating status through monitoring",
+      "informativeReferences": "CIS Controls v8: 11.4, 11.5 | NIST SP 800-53 Rev 5: CP-10, SI-7",
+      "sortOrder": 5,
+      "categoryId": "RC.RP"
+    },
+    {
+      "id": "RC.RP-06",
+      "name": "RC.RP-06",
+      "description": "The end of incident recovery is declared based on criteria, and incident-related documentation is completed",
+      "implementationExamples": "Ex1: Define criteria for declaring recovery complete Ex2: Document all recovery activities and outcomes Ex3: Conduct post-incident review and lessons learned",
+      "informativeReferences": "CIS Controls v8: 17.4, 17.8 | NIST SP 800-53 Rev 5: CP-2, IR-4, IR-8",
+      "sortOrder": 6,
+      "categoryId": "RC.RP"
+    },
+    {
+      "id": "RC.CO-03",
+      "name": "RC.CO-03",
+      "description": "Recovery activities and progress in restoring operational capabilities are communicated to designated internal and external stakeholders",
+      "implementationExamples": "Ex1: Provide regular recovery status updates to stakeholders Ex2: Communicate restoration timelines and progress Ex3: Report recovery milestones to leadership",
+      "informativeReferences": "CIS Controls v8: 17.6, 17.8 | NIST SP 800-53 Rev 5: CP-2, IR-4, IR-6",
+      "sortOrder": 1,
+      "categoryId": "RC.CO"
+    },
+    {
+      "id": "RC.CO-04",
+      "name": "RC.CO-04",
+      "description": "Public updates on incident recovery are shared using approved methods and messaging",
+      "implementationExamples": "Ex1: Coordinate public communications through approved channels Ex2: Ensure consistent messaging in public recovery updates Ex3: Follow communication plan for external recovery updates",
+      "informativeReferences": "CIS Controls v8: 17.6 | NIST SP 800-53 Rev 5: IR-6, IR-7",
+      "sortOrder": 2,
+      "categoryId": "RC.CO"
+    }
+  ]
+}
