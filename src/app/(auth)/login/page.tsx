@@ -4,6 +4,7 @@ import { useState, FormEvent } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import CircuitBackground from "@/components/CircuitBackground";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -42,6 +43,9 @@ export default function LoginPage() {
       />
       {/* Fade from image on left to white on right */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-white" />
+
+      {/* Interactive circuit particles */}
+      <CircuitBackground />
 
       {/* ─── Left Side: Login Form ──────────────────────────────────────── */}
       <div className="w-full flex flex-col justify-center items-end px-8 sm:px-16 lg:px-24 relative z-10">
