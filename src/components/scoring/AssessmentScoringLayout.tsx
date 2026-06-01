@@ -53,13 +53,13 @@ interface Props {
 
 // ─── Function metadata ───────────────────────────────────────────────────────
 
-const FUNCTION_INFO: Record<string, { color: string; bgColor: string; borderColor: string }> = {
-  GV: { color: "text-purple-700", bgColor: "bg-purple-50", borderColor: "border-purple-200" },
-  ID: { color: "text-blue-700", bgColor: "bg-blue-50", borderColor: "border-blue-200" },
-  PR: { color: "text-green-700", bgColor: "bg-green-50", borderColor: "border-green-200" },
-  DE: { color: "text-amber-700", bgColor: "bg-amber-50", borderColor: "border-amber-200" },
-  RS: { color: "text-red-700", bgColor: "bg-red-50", borderColor: "border-red-200" },
-  RC: { color: "text-teal-700", bgColor: "bg-teal-50", borderColor: "border-teal-200" },
+const FUNCTION_INFO: Record<string, { color: string; bgColor: string; borderColor: string; hoverBg: string }> = {
+  GV: { color: "text-purple-700", bgColor: "bg-purple-50", borderColor: "border-purple-300", hoverBg: "hover:bg-purple-100" },
+  ID: { color: "text-blue-700", bgColor: "bg-blue-50", borderColor: "border-blue-300", hoverBg: "hover:bg-blue-100" },
+  PR: { color: "text-green-700", bgColor: "bg-green-50", borderColor: "border-green-300", hoverBg: "hover:bg-green-100" },
+  DE: { color: "text-amber-700", bgColor: "bg-amber-50", borderColor: "border-amber-300", hoverBg: "hover:bg-amber-100" },
+  RS: { color: "text-red-700", bgColor: "bg-red-50", borderColor: "border-red-300", hoverBg: "hover:bg-red-100" },
+  RC: { color: "text-teal-700", bgColor: "bg-teal-50", borderColor: "border-teal-300", hoverBg: "hover:bg-teal-100" },
 };
 
 // ─── Main Component ──────────────────────────────────────────────────────────
@@ -73,13 +73,22 @@ export default function AssessmentScoringLayout({
   users,
 }: Props) {
   const router = useRouter();
-  const [activeFunction, setActiveFunction] = useState(activeFunctionId);
+  const [activeFunction, setActiveFunction] = useState<string | null>(activeFunctionId);
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
 
-  const currentFunction = functions.find((f) => f.id === activeFunction);
+  // When a function filter is active, show only that function's categories
+  // When null, show ALL functions' categories
+  const visibleFunctions = activeFunction
+    ? functions.filter((f) => f.id === activeFunction)
+    : functions;
 
   const handleFunctionClick = (fnId: string) => {
-    setActiveFunction(fnId);
+    if (activeFunction === fnId) {
+      // Clicking the active function deselects it (show all)
+      setActiveFunction(null);
+    } else {
+      setActiveFunction(fnId);
+    }
     setExpandedCategories(new Set());
     router.push(`/assessments/${assessmentId}/score/${fnId}`, { scroll: false });
   };
@@ -97,7 +106,7 @@ export default function AssessmentScoringLayout({
   };
 
   const expandAll = () => {
-    const allCatIds = currentFunction?.categories.map((c) => c.id) ?? [];
+    const allCatIds = visibleFunctions.flatMap((fn) => fn.categories.map((c) => c.id));
     setExpandedCategories(new Set(allCatIds));
   };
 
@@ -106,90 +115,86 @@ export default function AssessmentScoringLayout({
   };
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] gap-3">
-      {/* ─── Left Pane: Function Navigation ────────────────────────────── */}
-      <div className="w-56 flex-shrink-0 overflow-y-auto space-y-1.5 border-r border-[var(--border-color)] pr-3">
-        {functions.map((fn) => {
-          const info = FUNCTION_INFO[fn.id] ?? { color: "text-gray-700", bgColor: "bg-gray-50", borderColor: "border-gray-200" };
-          const isActive = activeFunction === fn.id;
-          const controlCount = fn.categories.reduce((sum, c) => sum + c.subcategories.length, 0);
-
-          return (
-            <button
-              key={fn.id}
-              onClick={() => handleFunctionClick(fn.id)}
-              className={`w-full text-left rounded-lg border p-2.5 transition-all ${
-                isActive
-                  ? `${info.borderColor} ${info.bgColor} ring-1 ring-indigo-300`
-                  : "border-gray-200 bg-white hover:bg-gray-50"
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <span className={`text-xs font-bold ${info.color}`}>{fn.id}</span>
-                <span className="text-xs text-gray-400">{controlCount}</span>
-              </div>
-              <p className={`text-xs font-semibold mt-0.5 ${isActive ? info.color : "text-gray-800"}`}>
-                {fn.name}
-              </p>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* ─── Right Pane: Scoring Table ─────────────────────────────────── */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Header */}
-        <div className="flex items-center justify-between px-3 py-2 border-b border-[var(--border-color)] flex-shrink-0 bg-[var(--card-bg)]">
+    <div className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden">
+      {/* ─── Top: Function Filter Tabs ────────────────────────────────── */}
+      <div className="flex-shrink-0 px-4 py-3 bg-[var(--card-bg)] border-b border-[var(--border-color)]">
+        <div className="flex items-center justify-between mb-2">
           <div>
-            <h2 className="text-sm font-bold text-[var(--foreground)]">
-              {currentFunction?.id}: {currentFunction?.name}
-            </h2>
-            <p className="text-xs text-[var(--muted)]">{assessmentName}</p>
+            <h2 className="text-sm font-bold text-[var(--foreground)]">{assessmentName}</h2>
           </div>
           <div className="flex gap-2">
-            <button onClick={expandAll} className="text-xs text-indigo-600 hover:underline">Expand All</button>
-            <button onClick={collapseAll} className="text-xs text-indigo-600 hover:underline">Collapse All</button>
+            <button onClick={expandAll} className="text-xs text-purple-600 hover:underline font-medium">Expand All</button>
+            <button onClick={collapseAll} className="text-xs text-purple-600 hover:underline font-medium">Collapse All</button>
           </div>
         </div>
+        <div className="flex gap-2 flex-wrap">
+          {functions.map((fn) => {
+            const info = FUNCTION_INFO[fn.id] ?? { color: "text-gray-700", bgColor: "bg-gray-50", borderColor: "border-gray-300", hoverBg: "hover:bg-gray-100" };
+            const isActive = activeFunction === fn.id;
+            const controlCount = fn.categories.reduce((sum, c) => sum + c.subcategories.length, 0);
 
+            return (
+              <button
+                key={fn.id}
+                onClick={() => handleFunctionClick(fn.id)}
+                className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold transition-all ${
+                  isActive
+                    ? `${info.borderColor} ${info.bgColor} ring-2 ring-purple-300 shadow-sm`
+                    : `border-gray-200 bg-white ${info.hoverBg}`
+                }`}
+              >
+                <span className={info.color}>{fn.id}</span>
+                <span className={isActive ? info.color : "text-gray-600"}>{fn.name}</span>
+                <span className="text-gray-400 text-[10px]">({controlCount})</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ─── Table Container (no page scroll) ─────────────────────────── */}
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Frozen Header Row */}
-        <div className="flex-shrink-0 overflow-x-auto bg-gray-100 border-b border-gray-300">
-          <table className="w-full min-w-[1200px] text-xs">
+        <div className="flex-shrink-0 overflow-x-auto bg-purple-50 border-b-2 border-purple-300">
+          <table className="w-full min-w-[1400px] text-xs border-collapse">
             <thead>
               <tr>
-                <th className="px-2 py-2 text-left font-bold text-gray-700 w-[100px] sticky left-0 bg-gray-100 z-10">Control ID</th>
-                <th className="px-2 py-2 text-left font-bold text-gray-700 w-[200px]">Description</th>
-                <th className="px-2 py-2 text-left font-bold text-gray-700 w-[160px]">Expected Evidence</th>
-                <th className="px-2 py-2 text-center font-bold text-gray-700 w-[200px]">Maturity Level (1-5 / N/A)</th>
-                <th className="px-2 py-2 text-center font-bold text-gray-700 w-[50px]">Gap</th>
-                <th className="px-2 py-2 text-left font-bold text-gray-700 w-[150px]">Assigned To</th>
-                <th className="px-2 py-2 text-left font-bold text-gray-700 w-[160px]">Justification</th>
-                <th className="px-2 py-2 text-center font-bold text-gray-700 w-[80px]">Evidence</th>
-                <th className="px-2 py-2 text-center font-bold text-gray-700 w-[110px]">Target Date</th>
+                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[100px] sticky left-0 bg-purple-50 z-10" style={{ resize: "horizontal", overflow: "hidden", minWidth: "80px" }}>Control ID</th>
+                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[220px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "120px" }}>Description</th>
+                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[200px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "120px" }}>Expected Evidence</th>
+                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[200px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "160px" }}>Maturity Level (1-5 / N/A)</th>
+                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[80px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "50px" }}>Gap Analysis</th>
+                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[140px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "100px" }}>Assigned To</th>
+                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[180px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "100px" }}>Justification</th>
+                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[80px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "60px" }}>Evidence</th>
+                <th className="px-2 py-2.5 text-center font-bold text-purple-800 w-[110px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "90px" }}>Target Date</th>
               </tr>
             </thead>
           </table>
         </div>
 
-        {/* Scrollable Body */}
-        <div className="flex-1 overflow-auto">
-          <table className="w-full min-w-[1200px] text-xs">
+        {/* Scrollable Body (only this scrolls vertically) */}
+        <div className="flex-1 overflow-y-auto overflow-x-auto">
+          <table className="w-full min-w-[1400px] text-xs border-collapse">
             <tbody>
-              {currentFunction?.categories.map((cat) => {
-                const isExpanded = expandedCategories.has(cat.id);
-                const info = FUNCTION_INFO[currentFunction.id];
-                return (
-                  <CategorySection
-                    key={cat.id}
-                    category={cat}
-                    isExpanded={isExpanded}
-                    onToggle={() => toggleCategory(cat.id)}
-                    scores={scores}
-                    assessmentId={assessmentId}
-                    users={users}
-                    colorInfo={info}
-                  />
-                );
+              {visibleFunctions.map((fn) => {
+                const info = FUNCTION_INFO[fn.id] ?? { color: "text-gray-700", bgColor: "bg-gray-50", borderColor: "border-gray-300", hoverBg: "hover:bg-gray-100" };
+                return fn.categories.map((cat) => {
+                  const isExpanded = expandedCategories.has(cat.id);
+                  return (
+                    <CategorySection
+                      key={cat.id}
+                      category={cat}
+                      functionId={fn.id}
+                      isExpanded={isExpanded}
+                      onToggle={() => toggleCategory(cat.id)}
+                      scores={scores}
+                      assessmentId={assessmentId}
+                      users={users}
+                      colorInfo={info}
+                    />
+                  );
+                });
               })}
             </tbody>
           </table>
@@ -203,23 +208,24 @@ export default function AssessmentScoringLayout({
 
 interface CategorySectionProps {
   category: Category;
+  functionId: string;
   isExpanded: boolean;
   onToggle: () => void;
   scores: Score[];
   assessmentId: string;
   users: User[];
-  colorInfo: { color: string; bgColor: string; borderColor: string };
+  colorInfo: { color: string; bgColor: string; borderColor: string; hoverBg: string };
 }
 
-function CategorySection({ category, isExpanded, onToggle, scores, assessmentId, users, colorInfo }: CategorySectionProps) {
+function CategorySection({ category, functionId, isExpanded, onToggle, scores, assessmentId, users, colorInfo }: CategorySectionProps) {
   return (
     <>
       {/* Category Header - Clickable to expand */}
       <tr
         onClick={onToggle}
-        className={`cursor-pointer hover:bg-gray-50 ${colorInfo.bgColor}`}
+        className={`cursor-pointer hover:bg-gray-50 ${colorInfo.bgColor} border-b border-gray-200`}
       >
-        <td colSpan={9} className="px-3 py-2.5">
+        <td colSpan={9} className="px-3 py-2.5 border-r border-purple-100">
           <div className="flex items-center gap-2">
             <svg
               className={`h-4 w-4 text-gray-500 transition-transform ${isExpanded ? "rotate-90" : ""}`}
@@ -227,7 +233,7 @@ function CategorySection({ category, isExpanded, onToggle, scores, assessmentId,
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
             </svg>
-            <span className={`text-xs font-bold ${colorInfo.color}`}>{category.id}</span>
+            <span className={`text-xs font-bold ${colorInfo.color}`}>{functionId} → {category.id}</span>
             <span className="text-xs font-semibold text-gray-800">{category.name}</span>
             <span className="text-xs text-gray-500">({category.subcategories.length} controls)</span>
           </div>
@@ -255,6 +261,19 @@ interface ScoringRowProps {
   score: Score | null;
   assessmentId: string;
   users: User[];
+}
+
+/**
+ * Parse implementation examples into separate line items.
+ * Splits on patterns like "Ex1:", "Ex2:", etc.
+ */
+function parseImplementationExamples(text: string): string[] {
+  if (!text) return [];
+  // Split on Ex followed by a number and colon
+  const parts = text.split(/Ex\d+:\s*/i).filter((p) => p.trim().length > 0);
+  if (parts.length > 0) return parts.map((p) => p.trim());
+  // Fallback: split on newlines
+  return text.split("\n").filter((p) => p.trim().length > 0);
 }
 
 function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps) {
@@ -324,35 +343,41 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
 
   const gap = currentScore !== null && !isNA ? 5 - currentScore : null;
 
-  // Derive expected evidence from implementation examples
-  const expectedEvidence = subcategory.implementationExamples
-    ? subcategory.implementationExamples.split("\n").slice(0, 2).join("; ").substring(0, 120)
-    : "Documentation demonstrating control implementation";
+  // Parse implementation examples into separate line items
+  const evidenceItems = parseImplementationExamples(subcategory.implementationExamples);
 
   return (
-    <tr className={`hover:bg-gray-50 border-b border-gray-100 ${isPending ? "opacity-50" : ""}`}>
+    <tr className={`border-b border-gray-200 hover:bg-gray-50 ${isPending ? "opacity-50" : ""}`}>
       {/* Control ID */}
-      <td className="px-2 py-2 align-top sticky left-0 bg-white z-[5]">
+      <td className="px-2 py-3 align-top sticky left-0 bg-white z-[5] border-r border-gray-200 whitespace-normal break-words">
         <span className="font-bold text-gray-900">{subcategory.id}</span>
       </td>
 
-      {/* Description */}
-      <td className="px-2 py-2 align-top">
+      {/* Description - full text, no truncation */}
+      <td className="px-2 py-3 align-top border-r border-gray-200 whitespace-normal break-words">
         <p className="text-xs text-gray-700 leading-relaxed">
           {subcategory.description}
         </p>
       </td>
 
-      {/* Expected Evidence */}
-      <td className="px-2 py-2 align-top">
-        <p className="text-xs text-gray-500 leading-relaxed italic">
-          {expectedEvidence}...
-        </p>
+      {/* Expected Evidence - each Ex as separate line item */}
+      <td className="px-2 py-3 align-top border-r border-gray-200 whitespace-normal break-words">
+        {evidenceItems.length > 0 ? (
+          <ul className="list-disc list-inside space-y-1">
+            {evidenceItems.map((item, idx) => (
+              <li key={idx} className="text-xs text-gray-600 leading-relaxed">
+                {item}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-xs text-gray-500 italic">Documentation demonstrating control implementation</p>
+        )}
       </td>
 
       {/* Maturity Level */}
-      <td className="px-2 py-2 align-top">
-        <div className="flex items-center gap-0.5 justify-center">
+      <td className="px-2 py-3 align-top border-r border-gray-200">
+        <div className="flex items-center gap-0.5 justify-center flex-wrap">
           {[1, 2, 3, 4, 5].map((level) => (
             <button
               key={level}
@@ -361,8 +386,8 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
               disabled={isPending}
               className={`w-7 h-7 rounded text-xs font-bold transition-all ${
                 currentScore === level && !isNA
-                  ? "bg-indigo-600 text-white"
-                  : "border border-gray-300 bg-white text-gray-600 hover:bg-indigo-50"
+                  ? "bg-purple-600 text-white"
+                  : "border border-gray-300 bg-white text-gray-600 hover:bg-purple-50"
               }`}
               title={getLevelLabel(level)}
             >
@@ -382,8 +407,8 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
         </div>
       </td>
 
-      {/* Gap */}
-      <td className="px-2 py-2 align-top text-center">
+      {/* Gap Analysis */}
+      <td className="px-2 py-3 align-top text-center border-r border-gray-200">
         {gap !== null ? (
           <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${getGapBadge(gap)}`}>
             {gap}
@@ -394,7 +419,7 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
       </td>
 
       {/* Assigned To */}
-      <td className="px-2 py-2 align-top">
+      <td className="px-2 py-3 align-top border-r border-gray-200 whitespace-normal break-words">
         <select
           value={assignedTo}
           onChange={(e) => setAssignedTo(e.target.value)}
@@ -408,7 +433,7 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
       </td>
 
       {/* Justification */}
-      <td className="px-2 py-2 align-top">
+      <td className="px-2 py-3 align-top border-r border-gray-200 whitespace-normal break-words">
         <textarea
           value={justification}
           onChange={(e) => setJustification(e.target.value)}
@@ -420,10 +445,13 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
             validationError ? "border-red-400 bg-red-50" : "border-gray-300"
           }`}
         />
+        {validationError && (
+          <p className="text-[10px] text-red-500 mt-0.5">{validationError}</p>
+        )}
       </td>
 
       {/* Evidence */}
-      <td className="px-2 py-2 align-top text-center">
+      <td className="px-2 py-3 align-top text-center border-r border-gray-200">
         <label className="inline-flex cursor-pointer items-center gap-1 rounded border border-gray-300 px-1.5 py-1 text-xs hover:bg-gray-50">
           📎 {evidenceFiles.length > 0 ? evidenceFiles.length : "Upload"}
           <input type="file" multiple onChange={handleFileChange} className="hidden" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.txt" />
@@ -431,7 +459,7 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
       </td>
 
       {/* Target Date */}
-      <td className="px-2 py-2 align-top">
+      <td className="px-2 py-3 align-top whitespace-normal break-words">
         <input
           type="date"
           value={targetDate}
