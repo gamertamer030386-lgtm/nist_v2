@@ -159,15 +159,16 @@ export default function AssessmentScoringLayout({
           <table className="w-full min-w-[1400px] text-xs border-collapse">
             <thead>
               <tr>
-                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[100px] sticky left-0 bg-purple-50 z-10" style={{ resize: "horizontal", overflow: "hidden", minWidth: "80px" }}>Control ID</th>
-                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[220px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "120px" }}>Description</th>
-                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[200px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "120px" }}>Expected Evidence</th>
-                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[200px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "160px" }}>Maturity Level (1-5 / N/A)</th>
-                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[80px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "50px" }}>Gap Analysis</th>
-                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[140px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "100px" }}>Assigned To</th>
-                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[180px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "100px" }}>Justification</th>
-                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[80px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "60px" }}>Evidence</th>
-                <th className="px-2 py-2.5 text-center font-bold text-purple-800 w-[110px]" style={{ resize: "horizontal", overflow: "hidden", minWidth: "90px" }}>Target Date</th>
+                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[90px] min-w-[90px] max-w-[90px]">Control ID</th>
+                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200" style={{ resize: "horizontal", overflow: "hidden", minWidth: "200px" }}>Description</th>
+                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200" style={{ resize: "horizontal", overflow: "hidden", minWidth: "180px" }}>Expected Evidence</th>
+                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[180px] min-w-[180px] max-w-[180px]">Maturity Level (1-5 / N/A)</th>
+                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[50px] min-w-[50px] max-w-[50px]">Gap</th>
+                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[160px] min-w-[160px] max-w-[160px]">Assigned To</th>
+                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200" style={{ resize: "horizontal", overflow: "hidden", minWidth: "150px" }}>Justification</th>
+                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[70px] min-w-[70px] max-w-[70px]">Evidence</th>
+                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[110px] min-w-[110px] max-w-[110px]">Target Date</th>
+                <th className="px-2 py-2.5 text-left font-bold text-purple-800" style={{ resize: "horizontal", overflow: "hidden", minWidth: "120px" }}>Remarks</th>
               </tr>
             </thead>
           </table>
@@ -225,7 +226,7 @@ function CategorySection({ category, functionId, isExpanded, onToggle, scores, a
         onClick={onToggle}
         className={`cursor-pointer hover:bg-gray-50 ${colorInfo.bgColor} border-b border-gray-200`}
       >
-        <td colSpan={9} className="px-3 py-2.5 border-r border-purple-100">
+        <td colSpan={10} className="px-3 py-2.5 border-r border-purple-100">
           <div className="flex items-center gap-2">
             <svg
               className={`h-4 w-4 text-gray-500 transition-transform ${isExpanded ? "rotate-90" : ""}`}
@@ -283,6 +284,7 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
   const [assignedTo, setAssignedTo] = useState("");
   const [justification, setJustification] = useState(score?.comment ?? "");
   const [targetDate, setTargetDate] = useState("");
+  const [remarks, setRemarks] = useState("");
   const [evidenceFiles, setEvidenceFiles] = useState<File[]>([]);
   const [validationError, setValidationError] = useState<string | null>(null);
   const { showToast } = useToast();
@@ -348,8 +350,8 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
 
   return (
     <tr className={`border-b border-gray-200 hover:bg-gray-50 ${isPending ? "opacity-50" : ""}`}>
-      {/* Control ID */}
-      <td className="px-2 py-3 align-top sticky left-0 bg-white z-[5] border-r border-gray-200 whitespace-normal break-words">
+      {/* Control ID - FIXED */}
+      <td className="px-2 py-3 align-top bg-white border-r border-gray-200 w-[90px] min-w-[90px] max-w-[90px]">
         <span className="font-bold text-gray-900">{subcategory.id}</span>
       </td>
 
@@ -375,8 +377,8 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
         )}
       </td>
 
-      {/* Maturity Level */}
-      <td className="px-2 py-3 align-top border-r border-gray-200">
+      {/* Maturity Level - FIXED */}
+      <td className="px-2 py-3 align-top border-r border-gray-200 w-[180px] min-w-[180px] max-w-[180px]">
         <div className="flex items-center gap-0.5 justify-center flex-wrap">
           {[1, 2, 3, 4, 5].map((level) => (
             <button
@@ -407,8 +409,8 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
         </div>
       </td>
 
-      {/* Gap Analysis */}
-      <td className="px-2 py-3 align-top text-center border-r border-gray-200">
+      {/* Gap - FIXED */}
+      <td className="px-2 py-3 align-top text-center border-r border-gray-200 w-[50px] min-w-[50px] max-w-[50px]">
         {gap !== null ? (
           <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${getGapBadge(gap)}`}>
             {gap}
@@ -418,8 +420,8 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
         )}
       </td>
 
-      {/* Assigned To */}
-      <td className="px-2 py-3 align-top border-r border-gray-200 whitespace-normal break-words">
+      {/* Assigned To - FIXED */}
+      <td className="px-2 py-3 align-top border-r border-gray-200 w-[160px] min-w-[160px] max-w-[160px]">
         <select
           value={assignedTo}
           onChange={(e) => setAssignedTo(e.target.value)}
@@ -450,21 +452,33 @@ function ScoringRow({ subcategory, score, assessmentId, users }: ScoringRowProps
         )}
       </td>
 
-      {/* Evidence */}
-      <td className="px-2 py-3 align-top text-center border-r border-gray-200">
+      {/* Evidence - FIXED */}
+      <td className="px-2 py-3 align-top text-center border-r border-gray-200 w-[70px] min-w-[70px] max-w-[70px]">
         <label className="inline-flex cursor-pointer items-center gap-1 rounded border border-gray-300 px-1.5 py-1 text-xs hover:bg-gray-50">
           📎 {evidenceFiles.length > 0 ? evidenceFiles.length : "Upload"}
           <input type="file" multiple onChange={handleFileChange} className="hidden" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.txt" />
         </label>
       </td>
 
-      {/* Target Date */}
-      <td className="px-2 py-3 align-top whitespace-normal break-words">
+      {/* Target Date - FIXED */}
+      <td className="px-2 py-3 align-top border-r border-gray-200 w-[110px] min-w-[110px] max-w-[110px]">
         <input
           type="date"
           value={targetDate}
           onChange={(e) => setTargetDate(e.target.value)}
           className="w-full rounded border border-gray-300 px-1 py-1 text-xs"
+        />
+      </td>
+
+      {/* Remarks - EXPANDABLE */}
+      <td className="px-2 py-3 align-top whitespace-normal break-words">
+        <textarea
+          value={remarks}
+          onChange={(e) => setRemarks(e.target.value)}
+          rows={2}
+          maxLength={500}
+          placeholder="Additional remarks..."
+          className="w-full rounded border border-gray-300 px-1.5 py-1 text-xs resize-y"
         />
       </td>
     </tr>
