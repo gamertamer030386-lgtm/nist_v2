@@ -9,6 +9,7 @@ import {
   calculateOverallRollup,
   calculateProgress,
 } from "@/lib/scoring";
+import DashboardRadarChart from "@/components/dashboard/DashboardRadarChart";
 
 interface AssessmentDetailPageProps {
   params: Promise<{ id: string }>;
@@ -136,22 +137,16 @@ export default async function AssessmentDetailPage({
             </div>
           </div>
 
-          {/* Function Radar Chart Placeholder */}
+          {/* Function Radar Chart */}
           <div className="rounded-xl border border-purple-200 bg-white p-6 shadow-sm flex flex-col items-center justify-center">
-            <p className="text-sm font-medium text-gray-500 mb-4">Function Radar</p>
-            <div className="w-48 h-48 rounded-full border-2 border-dashed border-purple-300 flex items-center justify-center bg-purple-50/50">
-              <div className="text-center">
-                <svg className="w-10 h-10 mx-auto text-purple-300" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" />
-                </svg>
-                <p className="mt-2 text-xs text-purple-400">Radar Chart</p>
-                {functionRollups.map((fn) => (
-                  <p key={fn.functionId} className="text-[10px] text-gray-400">
-                    {fn.functionId}: {fn.rollup.currentScore?.toFixed(1) ?? "—"}
-                  </p>
-                ))}
-              </div>
-            </div>
+            <p className="text-sm font-medium text-gray-500 mb-2">Function Radar</p>
+            <DashboardRadarChart
+              data={functionRollups.map((fn) => ({
+                name: fn.functionId,
+                current: fn.rollup.currentScore ?? 0,
+                target: 5,
+              }))}
+            />
           </div>
 
           {/* Function Heatmap Placeholder */}
