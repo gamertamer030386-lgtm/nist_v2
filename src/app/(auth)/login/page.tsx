@@ -34,14 +34,14 @@ export default function LoginPage() {
 
   return (
     <div className="fixed inset-0 flex w-screen h-screen overflow-hidden">
-      {/* Full-page XIR background image */}
+      {/* Full-page XIR background image - positioned left */}
       <img
         src="/images/xir background.png"
         alt=""
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover object-left"
       />
-      {/* Light overlay so login form is readable */}
-      <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]" />
+      {/* Fade from image on left to white on right */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-white" />
 
       {/* ─── Left Side: Login Form ──────────────────────────────────────── */}
       <div className="w-full flex flex-col justify-center items-end px-8 sm:px-16 lg:px-24 relative z-10">
