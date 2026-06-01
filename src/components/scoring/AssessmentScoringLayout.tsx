@@ -152,54 +152,46 @@ export default function AssessmentScoringLayout({
         </div>
       </div>
 
-      {/* ─── Table Container (no page scroll) ─────────────────────────── */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Frozen Header Row */}
-        <div className="flex-shrink-0 overflow-x-auto bg-purple-50 border-b-2 border-purple-300">
-          <table className="w-full min-w-[1400px] text-xs border-collapse">
-            <thead>
-              <tr>
-                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[90px] min-w-[90px] max-w-[90px]">Control ID</th>
-                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200" style={{ resize: "horizontal", overflow: "hidden", minWidth: "200px" }}>Description</th>
-                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200" style={{ resize: "horizontal", overflow: "hidden", minWidth: "180px" }}>Expected Evidence</th>
-                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[180px] min-w-[180px] max-w-[180px]">Maturity Level (1-5 / N/A)</th>
-                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[50px] min-w-[50px] max-w-[50px]">Gap</th>
-                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200 w-[160px] min-w-[160px] max-w-[160px]">Assigned To</th>
-                <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200" style={{ resize: "horizontal", overflow: "hidden", minWidth: "150px" }}>Justification</th>
-                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[70px] min-w-[70px] max-w-[70px]">Evidence</th>
-                <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200 w-[110px] min-w-[110px] max-w-[110px]">Target Date</th>
-                <th className="px-2 py-2.5 text-left font-bold text-purple-800" style={{ resize: "horizontal", overflow: "hidden", minWidth: "120px" }}>Remarks</th>
-              </tr>
-            </thead>
-          </table>
-        </div>
-
-        {/* Scrollable Body (only this scrolls vertically) */}
-        <div className="flex-1 overflow-y-auto overflow-x-auto">
-          <table className="w-full min-w-[1400px] text-xs border-collapse">
-            <tbody>
-              {visibleFunctions.map((fn) => {
-                const info = FUNCTION_INFO[fn.id] ?? { color: "text-gray-700", bgColor: "bg-gray-50", borderColor: "border-gray-300", hoverBg: "hover:bg-gray-100" };
-                return fn.categories.map((cat) => {
-                  const isExpanded = expandedCategories.has(cat.id);
-                  return (
-                    <CategorySection
-                      key={cat.id}
-                      category={cat}
-                      functionId={fn.id}
-                      isExpanded={isExpanded}
-                      onToggle={() => toggleCategory(cat.id)}
-                      scores={scores}
-                      assessmentId={assessmentId}
-                      users={users}
-                      colorInfo={info}
-                    />
-                  );
-                });
-              })}
-            </tbody>
-          </table>
-        </div>
+      {/* ─── Single Table with Sticky Header (no page scroll) ─────── */}
+      <div className="flex-1 overflow-auto border border-purple-200 rounded-lg">
+        <table className="w-full text-xs border-collapse table-fixed" style={{ minWidth: "1500px" }}>
+          <thead className="sticky top-0 z-20 bg-purple-50 border-b-2 border-purple-300">
+            <tr>
+              <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200" style={{ width: "90px" }}>Control ID</th>
+              <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200" style={{ width: "220px" }}>Description</th>
+              <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200" style={{ width: "240px" }}>Expected Evidence</th>
+              <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200" style={{ width: "180px" }}>Maturity Level (1-5 / N/A)</th>
+              <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200" style={{ width: "45px" }}>Gap</th>
+              <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200" style={{ width: "170px" }}>Assigned To</th>
+              <th className="px-2 py-2.5 text-left font-bold text-purple-800 border-r border-purple-200" style={{ width: "160px" }}>Justification</th>
+              <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200" style={{ width: "70px" }}>Evidence</th>
+              <th className="px-2 py-2.5 text-center font-bold text-purple-800 border-r border-purple-200" style={{ width: "110px" }}>Target Date</th>
+              <th className="px-2 py-2.5 text-left font-bold text-purple-800" style={{ width: "140px" }}>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            {visibleFunctions.map((fn) => {
+              const info = FUNCTION_INFO[fn.id] ?? { color: "text-gray-700", bgColor: "bg-gray-50", borderColor: "border-gray-300", hoverBg: "hover:bg-gray-100" };
+              return fn.categories.map((cat) => {
+                const isExpanded = expandedCategories.has(cat.id);
+                return (
+                  <CategorySection
+                    key={cat.id}
+                    category={cat}
+                    functionId={fn.id}
+                    isExpanded={isExpanded}
+                    onToggle={() => toggleCategory(cat.id)}
+                    scores={scores}
+                    assessmentId={assessmentId}
+                    users={users}
+                    colorInfo={info}
+                  />
+                );
+              });
+            })}
+          </tbody>
+        </table>
+      </div>
       </div>
     </div>
   );
