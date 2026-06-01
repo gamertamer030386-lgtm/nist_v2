@@ -210,6 +210,19 @@ interface CategorySectionProps {
 }
 
 function CategorySection({ category, functionId, isExpanded, onToggle, scores, assessmentId, users, colorInfo }: CategorySectionProps) {
+  // Calculate average maturity and gap for this category
+  const categoryScores = category.subcategories
+    .map((sub) => scores.find((s) => s.subcategoryId === sub.id)?.currentScore ?? null)
+    .filter((s): s is number => s !== null);
+
+  const avgMaturity = categoryScores.length > 0
+    ? (categoryScores.reduce((sum, s) => sum + s, 0) / categoryScores.length).toFixed(1)
+    : "—";
+
+  const avgGap = categoryScores.length > 0
+    ? ((5 * categoryScores.length - categoryScores.reduce((sum, s) => sum + s, 0)) / categoryScores.length).toFixed(1)
+    : "—";
+
   return (
     <>
       {/* Category Header - Clickable to expand */}
@@ -228,6 +241,12 @@ function CategorySection({ category, functionId, isExpanded, onToggle, scores, a
             <span className={`text-xs font-bold ${colorInfo.color}`}>{functionId} → {category.id}</span>
             <span className="text-xs font-semibold text-gray-800">{category.name}</span>
             <span className="text-xs text-gray-500">({category.subcategories.length} controls)</span>
+            <span className="ml-auto flex items-center gap-3 text-xs">
+              <span className="text-purple-700 font-semibold">Avg Maturity: {avgMaturity}</span>
+              <span className={`font-semibold ${avgGap !== "—" && parseFloat(avgGap) >= 3 ? "text-red-600" : avgGap !== "—" && parseFloat(avgGap) >= 2 ? "text-yellow-600" : "text-green-600"}`}>
+                Avg Gap: {avgGap}
+              </span>
+            </span>
           </div>
         </td>
       </tr>
