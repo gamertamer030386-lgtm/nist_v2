@@ -48,7 +48,7 @@ export default function LoginPage() {
       <CircuitBackground />
 
       {/* ─── Left Side: Login Form ──────────────────────────────────────── */}
-      <div className="w-full flex flex-col justify-center items-end px-8 sm:px-16 lg:px-24 relative z-10">
+      <div className="w-full flex flex-col justify-center items-center lg:items-end lg:pr-[20%] px-8 sm:px-16 relative z-10">
         <div className="w-full max-w-sm bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/50">
           <h1 className="text-4xl font-bold text-gray-900 italic mb-1 text-center">
             Welcome back!
