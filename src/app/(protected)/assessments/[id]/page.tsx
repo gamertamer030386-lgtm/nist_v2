@@ -125,75 +125,14 @@ export default async function AssessmentDetailPage({
 
       {/* Dashboard Content - No Scroll, Single Pane */}
       <div className="flex-1 flex p-4 gap-4 overflow-hidden">
-        {/* Left Column: Score + Radar + Action Buttons */}
-        <div className="w-[35%] flex flex-col gap-3">
-          {/* Overall Maturity Score */}
-          <div className="rounded-xl border border-purple-200 bg-white p-4 shadow-sm flex items-center gap-4 h-[120px]">
-            <div className="w-20 h-20 rounded-full border-6 border-purple-200 flex items-center justify-center bg-purple-50 flex-shrink-0">
-              <span className="text-2xl font-bold text-purple-700">
-                {overallScore !== null ? overallScore.toFixed(1) : "—"}
-              </span>
-            </div>
-            <div className="flex-1">
-              <p className="text-xs font-medium text-gray-500">Overall Maturity Score</p>
-              <p className="text-[10px] text-gray-400 mt-1">Target: 5.0</p>
-              <div className="mt-2 h-2 w-full rounded-full bg-purple-100">
-                <div className="h-2 rounded-full bg-purple-600 transition-all" style={{ width: `${overallScore !== null ? (overallScore / 5) * 100 : 0}%` }} />
-              </div>
-            </div>
-          </div>
-
-          {/* Function Radar Chart */}
-          <div className="rounded-xl border border-purple-200 bg-white p-3 shadow-sm flex-1 flex flex-col min-h-0">
-            <p className="text-xs font-medium text-gray-500 mb-1">Function Radar</p>
-            <div className="flex-1 min-h-0">
-              <DashboardRadarChart
-                data={functionRollups.map((fn) => ({
-                  name: fn.functionId,
-                  current: fn.rollup.currentScore ?? 0,
-                  target: 5,
-                }))}
-              />
-            </div>
-          </div>
-
-          {/* Action Buttons - 2x2 grid */}
-          <div className="grid grid-cols-4 gap-2 h-[70px]">
-            <Link href={`/assessments/${id}/score/GV`} className="flex flex-col items-center justify-center rounded-lg border border-purple-200 bg-white p-2 hover:border-purple-400 hover:shadow transition-all">
-              <svg className="w-5 h-5 text-purple-700" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-              </svg>
-              <span className="text-[9px] font-semibold text-purple-700 mt-1">Assessment</span>
-            </Link>
-            <Link href={`/assessments/${id}/recommendations`} className="flex flex-col items-center justify-center rounded-lg border border-purple-200 bg-white p-2 hover:border-purple-400 hover:shadow transition-all">
-              <svg className="w-5 h-5 text-purple-700" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
-              </svg>
-              <span className="text-[9px] font-semibold text-purple-700 mt-1">Recommend</span>
-            </Link>
-            <Link href={`/assessments/${id}/heatmap`} className="flex flex-col items-center justify-center rounded-lg border border-purple-200 bg-white p-2 hover:border-purple-400 hover:shadow transition-all">
-              <svg className="w-5 h-5 text-purple-700" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
-              </svg>
-              <span className="text-[9px] font-semibold text-purple-700 mt-1">Heatmap</span>
-            </Link>
-            <Link href={`/assessments/${id}/roadmap`} className="flex flex-col items-center justify-center rounded-lg border border-purple-200 bg-white p-2 hover:border-purple-400 hover:shadow transition-all">
-              <svg className="w-5 h-5 text-purple-700" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-              </svg>
-              <span className="text-[9px] font-semibold text-purple-700 mt-1">Roadmap</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Right Column: Heatmap (spans full height) */}
-        <div className="w-[65%] rounded-xl border border-purple-200 bg-white p-4 shadow-sm flex flex-col overflow-hidden">
+        {/* Left: Heatmap 10x10 grid + 6 */}
+        <div className="flex-1 rounded-xl border border-purple-200 bg-white p-3 shadow-sm flex flex-col overflow-hidden">
           <div className="flex items-center justify-between mb-2 flex-shrink-0">
             <p className="text-sm font-semibold text-gray-700">Subcategory Heatmap</p>
-            <p className="text-xs text-gray-400">Overall: <span className="font-bold text-purple-700">{overallScore?.toFixed(1) ?? "—"}</span>/5</p>
+            <p className="text-xs text-gray-400">106 controls</p>
           </div>
-          <div className="flex-1 overflow-y-auto">
-            <div className="grid grid-cols-10 sm:grid-cols-12 lg:grid-cols-14 xl:grid-cols-16 gap-1">
+          <div className="flex-1 flex flex-col justify-center">
+            <div className="grid grid-cols-10 gap-1">
               {functions.map((fn) =>
                 fn.categories.flatMap((cat) =>
                   cat.subcategories.map((sub) => {
@@ -211,11 +150,11 @@ export default async function AssessmentDetailPage({
                     return (
                       <div
                         key={sub.id}
-                        className={`${bgColor} ${textColor} rounded p-1 flex flex-col items-center justify-center text-center min-h-[32px]`}
+                        className={`${bgColor} ${textColor} rounded p-0.5 flex flex-col items-center justify-center text-center aspect-square`}
                         title={`${sub.id} — Score: ${current ?? "N/A"} | Gap: ${gap ?? "N/A"}`}
                       >
-                        <span className="text-[7px] font-bold leading-tight">{sub.id}</span>
-                        <span className="text-[9px] font-semibold">{current ?? "—"}</span>
+                        <span className="text-[6px] font-bold leading-none">{sub.id}</span>
+                        <span className="text-[8px] font-semibold">{current ?? "—"}</span>
                       </div>
                     );
                   })
@@ -224,10 +163,57 @@ export default async function AssessmentDetailPage({
             </div>
           </div>
           <div className="flex items-center gap-3 mt-2 pt-2 border-t border-gray-100 flex-shrink-0">
-            <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-red-500" /><span className="text-[9px] text-gray-500">High (3+)</span></div>
-            <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-yellow-400" /><span className="text-[9px] text-gray-500">Medium (2)</span></div>
-            <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-green-400" /><span className="text-[9px] text-gray-500">Low (0-1)</span></div>
-            <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-gray-200" /><span className="text-[9px] text-gray-500">Not Scored</span></div>
+            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-red-500" /><span className="text-[8px] text-gray-500">High (3+)</span></div>
+            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-yellow-400" /><span className="text-[8px] text-gray-500">Med (2)</span></div>
+            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-green-400" /><span className="text-[8px] text-gray-500">Low (0-1)</span></div>
+            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-gray-200" /><span className="text-[8px] text-gray-500">N/A</span></div>
+          </div>
+        </div>
+
+        {/* Middle: Overall Maturity Score */}
+        <div className="w-[200px] flex-shrink-0 rounded-xl border border-purple-200 bg-white p-4 shadow-sm flex flex-col items-center justify-center">
+          <p className="text-xs font-medium text-gray-500 mb-3">Overall Maturity</p>
+          <div className="w-28 h-28 rounded-full border-8 border-purple-200 flex items-center justify-center bg-purple-50">
+            <span className="text-3xl font-bold text-purple-700">
+              {overallScore !== null ? overallScore.toFixed(1) : "—"}
+            </span>
+          </div>
+          <p className="mt-3 text-[10px] text-gray-400">Target: 5.0</p>
+          <div className="mt-2 w-full h-2 rounded-full bg-purple-100">
+            <div className="h-2 rounded-full bg-purple-600 transition-all" style={{ width: `${overallScore !== null ? (overallScore / 5) * 100 : 0}%` }} />
+          </div>
+          {/* Action buttons below score */}
+          <div className="grid grid-cols-2 gap-2 mt-4 w-full">
+            <Link href={`/assessments/${id}/score/GV`} className="flex flex-col items-center rounded-lg border border-purple-200 p-2 hover:bg-purple-50 transition-colors">
+              <svg className="w-4 h-4 text-purple-700" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+              <span className="text-[8px] font-semibold text-purple-700 mt-0.5">Assess</span>
+            </Link>
+            <Link href={`/assessments/${id}/recommendations`} className="flex flex-col items-center rounded-lg border border-purple-200 p-2 hover:bg-purple-50 transition-colors">
+              <svg className="w-4 h-4 text-purple-700" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
+              <span className="text-[8px] font-semibold text-purple-700 mt-0.5">Recommend</span>
+            </Link>
+            <Link href={`/assessments/${id}/heatmap`} className="flex flex-col items-center rounded-lg border border-purple-200 p-2 hover:bg-purple-50 transition-colors">
+              <svg className="w-4 h-4 text-purple-700" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" /></svg>
+              <span className="text-[8px] font-semibold text-purple-700 mt-0.5">Heatmap</span>
+            </Link>
+            <Link href={`/assessments/${id}/roadmap`} className="flex flex-col items-center rounded-lg border border-purple-200 p-2 hover:bg-purple-50 transition-colors">
+              <svg className="w-4 h-4 text-purple-700" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+              <span className="text-[8px] font-semibold text-purple-700 mt-0.5">Roadmap</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* Right: Function Radar */}
+        <div className="w-[280px] flex-shrink-0 rounded-xl border border-purple-200 bg-white p-3 shadow-sm flex flex-col">
+          <p className="text-xs font-medium text-gray-500 mb-1 flex-shrink-0">Function Radar</p>
+          <div className="flex-1 min-h-0">
+            <DashboardRadarChart
+              data={functionRollups.map((fn) => ({
+                name: fn.functionId,
+                current: fn.rollup.currentScore ?? 0,
+                target: 5,
+              }))}
+            />
           </div>
         </div>
       </div>
