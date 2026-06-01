@@ -34,9 +34,18 @@ export default function LoginPage() {
 
   return (
     <div className="fixed inset-0 flex w-screen h-screen overflow-hidden">
-      {/* ─── Left Side: Login Form (white/light) ────────────────────────── */}
-      <div className="w-full lg:w-[45%] flex flex-col justify-center px-8 sm:px-16 lg:px-20 bg-white relative z-10">
-        <div className="w-full max-w-sm mx-auto">
+      {/* Full-page XIR background image */}
+      <img
+        src="/images/xir background.png"
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      {/* Light overlay so login form is readable */}
+      <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]" />
+
+      {/* ─── Left Side: Login Form ──────────────────────────────────────── */}
+      <div className="w-full lg:w-[45%] flex flex-col justify-center px-8 sm:px-16 lg:px-20 relative z-10">
+        <div className="w-full max-w-sm mx-auto bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/50">
           <h1 className="text-4xl font-bold text-gray-900 italic mb-1">
             Welcome back!
           </h1>
@@ -121,17 +130,6 @@ export default function LoginPage() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* ─── Right Side: XIR background fading to white ────────────────── */}
-      <div className="hidden lg:block lg:w-[55%] relative overflow-hidden">
-        <img
-          src="/images/xir background.png"
-          alt="XIR Extended Incident Response"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        {/* Fade gradient from left (white) blending into the image */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent" />
       </div>
     </div>
   );
