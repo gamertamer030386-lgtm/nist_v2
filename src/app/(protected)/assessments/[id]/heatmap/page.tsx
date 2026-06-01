@@ -93,24 +93,24 @@ export default async function HeatmapPage({ params }: HeatmapPageProps) {
   const heatmapCells = computeHeatmapCells(functionRollups);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="w-full px-2 py-4">
       {/* Header */}
-      <div className="mb-6">
+      <div className="mb-4">
         <p className="text-sm text-gray-500">
           Visual overview of gap severity across all functions and categories
         </p>
       </div>
 
       {/* Legend */}
-      <div className="mb-6 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-        <h2 className="mb-3 text-sm font-semibold text-gray-700">
+      <div className="mb-4 rounded-lg border border-gray-200 bg-white p-3 shadow-sm">
+        <h2 className="mb-2 text-sm font-semibold text-gray-700">
           Gap Severity Legend
         </h2>
         <HeatmapLegend />
       </div>
 
       {/* Heatmap Grid */}
-      <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+      <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
         <HeatmapGrid cells={heatmapCells} />
       </div>
     </div>

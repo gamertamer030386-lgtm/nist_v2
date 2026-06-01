@@ -242,8 +242,8 @@ function CategorySection({ category, functionId, isExpanded, onToggle, scores, a
             <span className="text-xs font-semibold text-gray-800">{category.name}</span>
             <span className="text-xs text-gray-500">({category.subcategories.length} controls)</span>
             <span className="ml-auto flex items-center gap-3 text-xs">
-              <span className="text-purple-700 font-semibold">Avg Maturity: {avgMaturity}</span>
-              <span className={`font-semibold ${avgGap !== "—" && parseFloat(avgGap) >= 3 ? "text-red-600" : avgGap !== "—" && parseFloat(avgGap) >= 2 ? "text-yellow-600" : "text-green-600"}`}>
+              <span className="rounded-md bg-purple-100 px-2 py-0.5 text-purple-700 font-semibold">Avg Maturity: {avgMaturity}</span>
+              <span className={`rounded-md px-2 py-0.5 font-semibold ${avgGap !== "—" && parseFloat(avgGap) >= 3 ? "bg-red-100 text-red-600" : avgGap !== "—" && parseFloat(avgGap) >= 2 ? "bg-yellow-100 text-yellow-600" : "bg-green-100 text-green-600"}`}>
                 Avg Gap: {avgGap}
               </span>
             </span>

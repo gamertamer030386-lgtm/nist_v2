@@ -88,20 +88,20 @@ export default async function AssessmentDetailPage({
   return (
     <div className="h-full flex flex-col overflow-hidden bg-gray-50">
       {/* Dashboard Content - 2 Column Layout */}
-      <div className="flex-1 flex p-4 gap-4 overflow-hidden">
+      <div className="flex-1 grid grid-cols-2 gap-4 p-4 overflow-hidden">
         {/* Left Column: Score + Radar stacked */}
-        <div className="w-[280px] flex-shrink-0 flex flex-col gap-4">
+        <div className="flex flex-col gap-4 overflow-hidden">
           {/* Overall Maturity Score */}
-          <div className="rounded-xl border border-purple-200 bg-white p-4 shadow-sm flex flex-col items-center">
-            <p className="text-xs font-medium text-gray-500 mb-3">Overall Maturity</p>
-            <div className="w-24 h-24 rounded-full border-8 border-purple-200 flex items-center justify-center bg-purple-50">
-              <span className="text-2xl font-bold text-purple-700">
+          <div className="rounded-xl border border-purple-200 bg-white p-6 shadow-sm flex flex-col items-center">
+            <p className="text-sm font-medium text-gray-500 mb-4">Overall Maturity</p>
+            <div className="w-36 h-36 rounded-full border-[10px] border-purple-200 flex items-center justify-center bg-purple-50">
+              <span className="text-4xl font-bold text-purple-700">
                 {overallScore !== null ? overallScore.toFixed(1) : "—"}
               </span>
             </div>
-            <p className="mt-2 text-[10px] text-gray-400">Target: 5.0</p>
-            <div className="mt-2 w-full h-2 rounded-full bg-purple-100">
-              <div className="h-2 rounded-full bg-purple-600 transition-all" style={{ width: `${overallScore !== null ? (overallScore / 5) * 100 : 0}%` }} />
+            <p className="mt-3 text-xs text-gray-400">Target: 5.0</p>
+            <div className="mt-3 w-full h-3 rounded-full bg-purple-100">
+              <div className="h-3 rounded-full bg-purple-600 transition-all" style={{ width: `${overallScore !== null ? (overallScore / 5) * 100 : 0}%` }} />
             </div>
             {/* Action buttons */}
             <div className="grid grid-cols-2 gap-2 mt-4 w-full">
@@ -125,7 +125,7 @@ export default async function AssessmentDetailPage({
           </div>
 
           {/* Function Radar */}
-          <div className="flex-1 min-h-0 rounded-xl border border-purple-200 bg-white p-3 shadow-sm flex flex-col">
+          <div className="flex-1 min-h-[300px] rounded-xl border border-purple-200 bg-white p-3 shadow-sm flex flex-col">
             <p className="text-xs font-medium text-gray-500 mb-1 flex-shrink-0">Function Radar</p>
             <div className="flex-1 min-h-0">
               <DashboardRadarChart
@@ -139,8 +139,8 @@ export default async function AssessmentDetailPage({
           </div>
         </div>
 
-        {/* Right: Subcategory Heatmap filling remaining space */}
-        <div className="flex-1 rounded-xl border border-purple-200 bg-white p-3 shadow-sm flex flex-col overflow-hidden">
+        {/* Right: Heatmap per Control ID filling remaining space */}
+        <div className="rounded-xl border border-purple-200 bg-white p-3 shadow-sm flex flex-col overflow-hidden">
           <SubcategoryHeatmapGrid
             items={functions.flatMap((fn) =>
               fn.categories.flatMap((cat) =>

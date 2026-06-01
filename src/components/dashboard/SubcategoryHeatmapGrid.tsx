@@ -22,11 +22,11 @@ export default function SubcategoryHeatmapGrid({ items, overallScore }: Props) {
   return (
     <>
       <div className="flex items-center justify-between mb-2 flex-shrink-0">
-        <p className="text-sm font-semibold text-gray-700">Subcategory Heatmap</p>
+        <p className="text-sm font-semibold text-gray-700">Heatmap per Control ID</p>
         <p className="text-xs text-gray-400">Overall: <span className="font-bold text-purple-700">{overallScore?.toFixed(1) ?? "—"}</span>/5</p>
       </div>
       <div className="flex-1 overflow-y-auto">
-        <div className="grid grid-cols-10 gap-0.5">
+        <div className="grid grid-cols-10 gap-0">
           {items.map((item) => {
             let bgColor = "bg-gray-200";
             let textColor = "text-gray-500";
@@ -40,8 +40,7 @@ export default function SubcategoryHeatmapGrid({ items, overallScore }: Props) {
               <button
                 key={item.id}
                 onClick={() => setSelectedItem(item)}
-                className={`${bgColor} ${textColor} rounded-sm flex flex-col items-center justify-center text-center cursor-pointer hover:opacity-80 hover:ring-2 hover:ring-purple-400 transition-all`}
-                style={{ width: "32px", height: "32px" }}
+                className={`${bgColor} ${textColor} aspect-square rounded-sm flex flex-col items-center justify-center text-center cursor-pointer hover:opacity-80 hover:ring-2 hover:ring-purple-400 transition-all`}
                 title={`${item.id} — Score: ${item.currentScore ?? "N/A"} | Gap: ${item.gap ?? "N/A"}`}
               >
                 <span className="text-[7px] font-bold leading-none">{item.id.replace(/^[A-Z]+\./, "")}</span>

@@ -75,15 +75,15 @@ export default async function RecommendationsPage({
   ];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="w-full px-2 py-8">
       {/* Header */}
       <div className="mb-4">
         <p className="text-sm text-gray-500">
-          Control improvement recommendations based on gap analysis
+          Control improvement Recommendations based on gap analysis
         </p>
       </div>
 
-      <div className="mb-8 flex items-center justify-end">
+      <div className="mb-4 flex items-center justify-end">
         <GenerateRecommendationsButton assessmentId={id} />
       </div>
 
