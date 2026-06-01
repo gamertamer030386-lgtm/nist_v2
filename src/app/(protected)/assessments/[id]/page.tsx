@@ -149,31 +149,45 @@ export default async function AssessmentDetailPage({
             />
           </div>
 
-          {/* Function Heatmap Placeholder */}
-          <div className="rounded-xl border border-purple-200 bg-white p-6 shadow-sm flex flex-col items-center justify-center">
-            <p className="text-sm font-medium text-gray-500 mb-4">Function Heatmap</p>
-            <div className="grid grid-cols-3 gap-2 w-full max-w-[200px]">
-              {functionRollups.map((fn) => {
-                const score = fn.rollup.currentScore;
-                let bgColor = "bg-gray-100";
-                if (score !== null) {
-                  if (score >= 4) bgColor = "bg-green-400";
-                  else if (score >= 3) bgColor = "bg-yellow-400";
-                  else if (score >= 2) bgColor = "bg-orange-400";
-                  else bgColor = "bg-red-400";
-                }
-                return (
-                  <div
-                    key={fn.functionId}
-                    className={`${bgColor} rounded-lg p-3 flex flex-col items-center justify-center`}
-                  >
-                    <span className="text-xs font-bold text-white drop-shadow-sm">{fn.functionId}</span>
-                    <span className="text-[10px] text-white/80">{score?.toFixed(1) ?? "—"}</span>
-                  </div>
-                );
-              })}
+          {/* Function Heatmap - All Subcategories */}
+          <div className="rounded-xl border border-purple-200 bg-white p-4 shadow-sm flex flex-col">
+            <p className="text-sm font-medium text-gray-500 mb-3">Subcategory Heatmap</p>
+            <div className="flex-1 overflow-y-auto max-h-[220px]">
+              <div className="flex flex-wrap gap-1">
+                {functions.map((fn) =>
+                  fn.categories.flatMap((cat) =>
+                    cat.subcategories.map((sub) => {
+                      const score = scoreMap.get(sub.id);
+                      const current = score?.currentScore ?? null;
+                      const gap = current !== null ? 5 - current : null;
+                      let bgColor = "bg-gray-200";
+                      let textColor = "text-gray-500";
+                      if (gap !== null) {
+                        if (gap >= 3) { bgColor = "bg-red-500"; textColor = "text-white"; }
+                        else if (gap >= 2) { bgColor = "bg-yellow-400"; textColor = "text-gray-900"; }
+                        else if (gap >= 1) { bgColor = "bg-yellow-300"; textColor = "text-gray-900"; }
+                        else { bgColor = "bg-green-400"; textColor = "text-white"; }
+                      }
+                      return (
+                        <div
+                          key={sub.id}
+                          className={`${bgColor} ${textColor} rounded px-1 py-0.5 text-[8px] font-bold leading-tight`}
+                          title={`${sub.id}: Gap ${gap ?? "N/A"}`}
+                        >
+                          {sub.id.split("-")[0]?.split(".").pop()}-{sub.id.split("-")[1]}
+                        </div>
+                      );
+                    })
+                  )
+                )}
+              </div>
             </div>
-            <p className="mt-3 text-[10px] text-gray-400">Color scale: Red (1) → Green (5)</p>
+            <div className="flex items-center gap-3 mt-2 pt-2 border-t border-gray-100">
+              <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-red-500" /><span className="text-[9px] text-gray-500">High (3+)</span></div>
+              <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-yellow-400" /><span className="text-[9px] text-gray-500">Medium (2)</span></div>
+              <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-green-400" /><span className="text-[9px] text-gray-500">Low (0-1)</span></div>
+              <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-gray-200" /><span className="text-[9px] text-gray-500">Not Scored</span></div>
+            </div>
           </div>
         </div>
 
@@ -185,7 +199,7 @@ export default async function AssessmentDetailPage({
           >
             <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-3 group-hover:bg-purple-200 transition-colors">
               <svg className="w-6 h-6 text-purple-700" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15a2.25 2.25 0 012.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
               </svg>
             </div>
             <span className="text-sm font-semibold text-purple-700">Start Assessment</span>

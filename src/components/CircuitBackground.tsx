@@ -28,8 +28,8 @@ export default function CircuitBackground() {
     nodesRef.current = Array.from({ length: nodeCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
+      vx: (Math.random() - 0.5) * 0.8,
+      vy: (Math.random() - 0.5) * 0.8,
     }));
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -53,8 +53,8 @@ export default function CircuitBackground() {
 
         // Draw node
         ctx.beginPath();
-        ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(168, 85, 247, 0.4)";
+        ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(168, 85, 247, 0.7)";
         ctx.fill();
       }
 
@@ -69,8 +69,8 @@ export default function CircuitBackground() {
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = `rgba(168, 85, 247, ${0.15 * (1 - dist / 150)})`;
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `rgba(168, 85, 247, ${0.3 * (1 - dist / 150)})`;
+            ctx.lineWidth = 1;
             ctx.stroke();
           }
         }
@@ -83,17 +83,17 @@ export default function CircuitBackground() {
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < 200) {
-          const opacity = 0.6 * (1 - dist / 200);
+          const opacity = 0.9 * (1 - dist / 200);
           ctx.beginPath();
           ctx.moveTo(mouse.x, mouse.y);
           ctx.lineTo(node.x, node.y);
           ctx.strokeStyle = `rgba(147, 51, 234, ${opacity})`;
-          ctx.lineWidth = 1;
+          ctx.lineWidth = 1.5;
           ctx.stroke();
 
           // Glow the node near mouse
           ctx.beginPath();
-          ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
+          ctx.arc(node.x, node.y, 5, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(147, 51, 234, ${opacity})`;
           ctx.fill();
 
