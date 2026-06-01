@@ -44,12 +44,12 @@ export default function LoginPage() {
       <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]" />
 
       {/* ─── Left Side: Login Form ──────────────────────────────────────── */}
-      <div className="w-full lg:w-[45%] flex flex-col justify-center px-8 sm:px-16 lg:px-20 relative z-10">
-        <div className="w-full max-w-sm mx-auto bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/50">
-          <h1 className="text-4xl font-bold text-gray-900 italic mb-1">
+      <div className="w-full flex flex-col justify-center items-end px-8 sm:px-16 lg:px-24 relative z-10">
+        <div className="w-full max-w-sm bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/50">
+          <h1 className="text-4xl font-bold text-gray-900 italic mb-1 text-center">
             Welcome back!
           </h1>
-          <p className="text-gray-500 mb-8 text-sm">
+          <p className="text-gray-500 mb-8 text-sm text-center">
             Login to your secure data portal
           </p>
 
