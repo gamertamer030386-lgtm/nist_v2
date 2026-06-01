@@ -92,22 +92,33 @@ export default async function AssessmentDetailPage({
 
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-gray-50">
-      {/* Top Bar */}
-      <div className="flex-shrink-0 px-6 py-4 bg-white border-b border-gray-200 shadow-sm">
+      {/* Top Bar with Navigation */}
+      <div className="flex-shrink-0 px-6 py-3 bg-white border-b border-gray-200 shadow-sm">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <div>
-            <Link
-              href="/assessments"
-              className="text-sm text-purple-600 hover:text-purple-800"
-            >
-              ← Back to Assessments
-            </Link>
-            <h1 className="mt-1 text-3xl font-bold text-purple-900">
+            <h1 className="text-2xl font-bold text-purple-900">
               {assessment.name}
             </h1>
             <p className="text-xs text-gray-500">
-              Created {new Date(assessment.createdAt).toLocaleDateString()} • {scoredCount}/106 scored • {progress.toFixed(0)}% complete
+              {scoredCount}/106 scored • {progress.toFixed(0)}% complete
             </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Link href={`/assessments/${id}`} className="rounded-lg bg-purple-100 px-3 py-1.5 text-xs font-semibold text-purple-700 hover:bg-purple-200 transition-colors">
+              Dashboard
+            </Link>
+            <Link href={`/assessments/${id}/score/GV`} className="rounded-lg bg-purple-100 px-3 py-1.5 text-xs font-semibold text-purple-700 hover:bg-purple-200 transition-colors">
+              Start Assessment
+            </Link>
+            <Link href={`/assessments/${id}/recommendations`} className="rounded-lg bg-purple-100 px-3 py-1.5 text-xs font-semibold text-purple-700 hover:bg-purple-200 transition-colors">
+              Recommendations
+            </Link>
+            <Link href={`/assessments/${id}/heatmap`} className="rounded-lg bg-purple-100 px-3 py-1.5 text-xs font-semibold text-purple-700 hover:bg-purple-200 transition-colors">
+              Heatmap
+            </Link>
+            <Link href={`/assessments/${id}/roadmap`} className="rounded-lg bg-purple-100 px-3 py-1.5 text-xs font-semibold text-purple-700 hover:bg-purple-200 transition-colors">
+              Roadmap
+            </Link>
           </div>
         </div>
       </div>
