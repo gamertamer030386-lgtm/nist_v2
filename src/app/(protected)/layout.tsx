@@ -27,8 +27,8 @@ export default async function ProtectedLayout({
         {/* Top Header Bar */}
         <header className="flex h-12 items-center justify-between border-b border-[var(--border-color)] bg-[var(--card-bg)] px-4 flex-shrink-0">
           {/* Left: App name */}
-          <Link href="/assessments" className="text-sm font-bold text-[var(--foreground)]">
-            NIST CSF 2.0 Assessment
+          <Link href="/assessments" className="text-lg font-bold text-purple-800">
+            Cybersecurity Posture Maturity Assessment
           </Link>
 
           {/* Right: Tasks, Theme, Notifications, User */}

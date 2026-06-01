@@ -1,26 +1,26 @@
 @import "tailwindcss";
 
-/* ─── Day Theme (default) ─────────────────────────────────────────────────── */
+/* ─── Day Theme (default) — Purple palette ────────────────────────────────── */
 [data-theme="day"],
 :root {
-  --background: #FFFDF7;
-  --foreground: #1a1a1a;
+  --background: #faf8ff;
+  --foreground: #1e1033;
   --card-bg: #ffffff;
-  --border-color: #e5e5e5;
-  --muted: #6b7280;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
+  --border-color: #e9e0f5;
+  --muted: #6b5b7b;
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
 }
 
-/* ─── Night Theme ─────────────────────────────────────────────────────────── */
+/* ─── Night Theme — Dark purple ───────────────────────────────────────────── */
 [data-theme="night"] {
-  --background: #2d2d2d;
-  --foreground: #e5e5e5;
-  --card-bg: #3a3a3a;
-  --border-color: #4a4a4a;
-  --muted: #9ca3af;
-  --accent: #60a5fa;
-  --accent-hover: #93c5fd;
+  --background: #1a1025;
+  --foreground: #e8e0f0;
+  --card-bg: #2d1f3d;
+  --border-color: #3d2d52;
+  --muted: #a78bbd;
+  --accent: #a78bfa;
+  --accent-hover: #c4b5fd;
 }
 
 @theme inline {
