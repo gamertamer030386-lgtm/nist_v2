@@ -123,13 +123,15 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* ─── Right Side: Dark purple with blurred background ────────────── */}
+      {/* ─── Right Side: XIR background fading to white ────────────────── */}
       <div className="hidden lg:block lg:w-[55%] relative overflow-hidden">
         <img
           src="/images/xir background.png"
           alt="XIR Extended Incident Response"
           className="absolute inset-0 w-full h-full object-cover"
         />
+        {/* Fade gradient from left (white) blending into the image */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent" />
       </div>
     </div>
   );
