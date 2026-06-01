@@ -87,12 +87,13 @@ export default function AssessmentScoringLayout({
   };
 
   return (
-    <div className="flex h-[calc(100vh-8rem)] gap-4">
+    <div className="flex h-[calc(100vh-4rem)] gap-4">
       {/* ─── Left Pane: Function Boxes ─────────────────────────────────── */}
-      <div className="w-64 flex-shrink-0 overflow-y-auto space-y-2 pr-2">
+      <div className="w-64 flex-shrink-0 overflow-y-auto space-y-2 pr-2 flex flex-col">
         <h2 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">
           NIST CSF 2.0 Functions
         </h2>
+        <div className="flex-1 space-y-2">
         {functions.map((fn) => {
           const info = FUNCTION_INFO[fn.id] ?? { color: "text-gray-700", bgColor: "bg-gray-50", borderColor: "border-gray-300", shortDesc: "" };
           const isActive = activeFunction === fn.id;
@@ -123,12 +124,13 @@ export default function AssessmentScoringLayout({
               <p className={`text-xs font-semibold ${isActive ? info.color : "text-gray-800"}`}>
                 {fn.name}
               </p>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed line-clamp-2">
+              <p className="text-xs text-gray-500 mt-1 leading-relaxed">
                 {info.shortDesc}
               </p>
             </button>
           );
         })}
+        </div>
       </div>
 
       {/* ─── Right Pane: Subcategory Scoring Table ─────────────────────── */}
