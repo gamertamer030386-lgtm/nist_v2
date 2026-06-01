@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
@@ -7,7 +6,6 @@ import { calculateCategoryRollup, calculateFunctionRollup } from "@/lib/scoring"
 import { computeHeatmapCells } from "@/lib/heatmap";
 import { HeatmapGrid } from "@/components/heatmap/HeatmapGrid";
 import { HeatmapLegend } from "@/components/heatmap/HeatmapLegend";
-import AssessmentNav from "@/components/navigation/AssessmentNav";
 import type { FunctionRollupData, CategoryRollupData } from "@/components/dashboard/FunctionSummaryTable";
 
 interface HeatmapPageProps {
@@ -98,21 +96,10 @@ export default async function HeatmapPage({ params }: HeatmapPageProps) {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="mb-6">
-        <Link
-          href="/assessments"
-          className="text-sm text-indigo-600 hover:text-indigo-900"
-        >
-          ← Back to Assessments
-        </Link>
-        <h1 className="mt-2 text-2xl font-bold text-gray-900">
-          {assessment.name} — Heatmap
-        </h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="text-sm text-gray-500">
           Visual overview of gap severity across all functions and categories
         </p>
       </div>
-
-      <AssessmentNav assessmentId={id} />
 
       {/* Legend */}
       <div className="mb-6 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">

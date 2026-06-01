@@ -1,11 +1,9 @@
-import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { getRecommendations } from "@/actions/recommendations";
 import { prisma } from "@/lib/prisma";
 import GenerateRecommendationsButton from "@/components/recommendations/GenerateRecommendationsButton";
-import AssessmentNav from "@/components/navigation/AssessmentNav";
 import type { ControlCategory, PriorityLevel, EffortLevel } from "@prisma/client";
 
 interface RecommendationsPageProps {
@@ -79,25 +77,11 @@ export default async function RecommendationsPage({
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Header */}
-      <div className="mb-6">
-        <Link
-          href="/assessments"
-          className="text-sm text-indigo-600 hover:text-indigo-900"
-        >
-          ← Back to Assessments
-        </Link>
-      </div>
-
       <div className="mb-4">
-        <h1 className="text-2xl font-bold text-gray-900">
-          {assessment.name} — Recommendations
-        </h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="text-sm text-gray-500">
           Control improvement recommendations based on gap analysis
         </p>
       </div>
-
-      <AssessmentNav assessmentId={id} />
 
       <div className="mb-8 flex items-center justify-end">
         <GenerateRecommendationsButton assessmentId={id} />

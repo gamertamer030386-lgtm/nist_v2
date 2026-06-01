@@ -6,7 +6,6 @@ import { getRecommendations } from "@/actions/recommendations";
 import { prisma } from "@/lib/prisma";
 import RoadmapTimeline from "@/components/roadmap/RoadmapTimeline";
 import ExportRoadmapButton from "@/components/roadmap/ExportRoadmapButton";
-import AssessmentNav from "@/components/navigation/AssessmentNav";
 import type { RecommendationCardData } from "@/components/roadmap/DraggableCard";
 
 interface RoadmapPageProps {
@@ -47,27 +46,12 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      {/* Header */}
-      <div className="mb-6">
-        <Link
-          href="/assessments"
-          className="text-sm text-indigo-600 hover:text-indigo-900"
-        >
-          ← Back to Assessments
-        </Link>
-      </div>
-
       <div className="mb-4">
-        <h1 className="text-2xl font-bold text-gray-900">
-          {assessment.name} — Roadmap
-        </h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="text-sm text-gray-500">
           Drag recommendations between phases to adjust your implementation
           timeline
         </p>
       </div>
-
-      <AssessmentNav assessmentId={id} />
 
       <div className="mb-8 flex items-center justify-end">
         <ExportRoadmapButton assessmentId={id} />
